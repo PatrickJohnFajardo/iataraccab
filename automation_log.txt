@@ -37973,3 +37973,17 @@ stening for com'
 
 “ny changeu tr'
 [2026-02-11 21:10:44] [INFO] Bot stopped.
+[2026-02-12 19:22:49] [INFO] Bot Initialized. Pattern: PPPB | Mode: Cycle-Reset | Base: 10
+[2026-02-12 19:22:51] [WARNING] REMOTE UPDATE: Pattern changed from PPPB -> PPBB
+[2026-02-12 19:22:51] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-12 19:22:51] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-12 19:22:51] [SUCCESS] REMOTE COMMAND: TRUE (RUN) received. Resuming bot cycle...
+[2026-02-12 19:22:51] [INFO] Bot session active. Listening for commands...
+[2026-02-12 19:22:52] [INFO] Initial Balance Check: Unknown
+[2026-02-12 19:23:16] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-12 19:23:40] [SUCCESS] REMOTE COMMAND: TRUE (RUN) received. Resuming bot cycle...
+[2026-02-12 19:23:49] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-12 19:24:56] [SUCCESS] REMOTE COMMAND: TRUE (RUN) received. Resuming bot cycle...
+[2026-02-12 19:25:03] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-12 19:25:41] [INFO] Stopping bot...
+[2026-02-12 19:25:41] [INFO] Bot stopped.
