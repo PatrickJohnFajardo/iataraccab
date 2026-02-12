@@ -1,0 +1,74 @@
+{
+  "target_a": {
+    "x": 1391,
+    "y": 454,
+    "color": [31, 31, 31]
+  },
+  "target_b": {
+    "x": 928,
+    "y": 428,
+    "color": [31, 31, 31]
+  },
+  "target_c": {
+    "x": 1089,
+    "y": 558,
+    "color": [31, 31, 31]
+  },
+  "status_region_main": {
+    "x": 1221,
+    "y": 647,
+    "width": 104,
+    "height": 140
+  },
+  "status_region_balance": {
+    "x": 0,
+    "y": 0,
+    "width": 100,
+    "height": 50
+  },
+  "status_region_tie": {
+    "x": 1007,
+    "y": 601,
+    "width": 386,
+    "height": 252
+  },
+  "chips": {
+    "10": {
+      "x": 961,
+      "y": 820
+    },
+    "50": {
+      "x": 1120,
+      "y": 843
+    },
+    "100": {
+      "x": 1247,
+      "y": 862
+    },
+    "250": {
+      "x": 1315,
+      "y": 871
+    },
+    "1250": {
+      "x": 1361,
+      "y": 868
+    },
+    "5000": {
+      "x": 1429,
+      "y": 866
+    },
+    "12500": {
+      "x": 1462,
+      "y": 868
+    },
+    "50000": {
+      "x": 1494,
+      "y": 870
+    }
+  },
+  "supabase": {
+    "url": "https://kuayswrsszqlojgopqll.supabase.co",
+    "key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt1YXlzd3Jzc3pxbG9qZ29wcWxsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA3MDU3MjEsImV4cCI6MjA4NjI4MTcyMX0.f0ocTcbzFlYBbjT-CWri_Igvq-6BmtcxH2xdaI7BG-4",
+    "pc_name": "PC-Josh"
+  }
+}
