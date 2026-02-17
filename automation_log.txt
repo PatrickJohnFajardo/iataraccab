@@ -37987,3 +37987,142 @@ stening for com'
 [2026-02-12 19:25:03] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
 [2026-02-12 19:25:41] [INFO] Stopping bot...
 [2026-02-12 19:25:41] [INFO] Bot stopped.
+[2026-02-13 14:59:41] [INFO] Starting in HEADLESS mode...
+[2026-02-13 14:59:41] [INFO] Bot Initialized. Pattern: B | Mode: Cycle-Reset | Base: 10
+[2026-02-13 20:09:20] [INFO] Starting in HEADLESS mode...
+[2026-02-13 20:09:20] [INFO] Bot Initialized. Pattern: B | Mode: Cycle-Reset | Base: 10
+[2026-02-13 20:09:22] [WARNING] REMOTE UPDATE: Pattern changed from B -> PPBB
+[2026-02-13 20:09:22] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-13 20:09:22] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-13 20:09:22] [INFO] Bot started. Press Ctrl+C in terminal to stop.
+[2026-02-13 20:09:23] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-13 20:09:23] [INFO] Initial Balance Check: 4.0
+[2026-02-14 08:27:19] [INFO] Starting in HEADLESS mode...
+[2026-02-14 08:27:19] [INFO] Bot Initialized. Pattern: B | Mode: Cycle-Reset | Base: 10
+[2026-02-14 08:27:22] [WARNING] REMOTE UPDATE: Pattern changed from B -> PPBB
+[2026-02-14 08:27:22] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-14 08:27:22] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-14 08:27:22] [INFO] Bot started. Press Ctrl+C in terminal to stop.
+[2026-02-14 08:27:23] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-14 08:27:23] [INFO] Initial Balance Check: 4.0
+[2026-02-14 14:17:37] [INFO] Starting in HEADLESS mode...
+[2026-02-14 14:17:37] [INFO] Bot Initialized. Pattern: B | Mode: Cycle-Reset | Base: 10
+[2026-02-14 14:17:41] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-14 14:17:42] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-14 14:17:42] [INFO] Bot started. Press Ctrl+C in terminal to stop.
+[2026-02-14 14:17:43] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-14 14:17:43] [INFO] Initial Balance Check: 4.0
+[2026-02-16 08:49:40] [INFO] Starting in HEADLESS mode...
+[2026-02-16 08:49:40] [INFO] Bot Initialized. Pattern: B | Mode: Cycle-Reset | Base: 10
+[2026-02-16 08:49:47] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-16 08:49:47] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-16 08:49:47] [INFO] Bot started. Press Ctrl+C in terminal to stop.
+[2026-02-16 08:49:49] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-16 08:49:49] [INFO] Initial Balance Check: 4.0
+[2026-02-16 09:19:17] [INFO] Starting in HEADLESS mode...
+[2026-02-16 09:19:17] [INFO] Bot Initialized. Pattern: B | Mode: Cycle-Reset | Base: 10
+[2026-02-16 09:19:21] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-16 09:19:21] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-16 09:19:21] [INFO] Bot started. Press Ctrl+C in terminal to stop.
+[2026-02-16 09:19:23] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-16 09:19:23] [WARNING] Drift Warning (Ignored): Expected [31, 31, 31], Got (140, 141, 161)
+[2026-02-16 09:19:23] [INFO] Initial Balance Check: Unknown
+[2026-02-16 09:19:24] [DEBUG] Main Region OCR Read: '189k views'
+[2026-02-17 13:56:25] [INFO] Starting in HEADLESS mode...
+[2026-02-17 13:56:25] [INFO] Bot Initialized. Pattern: B | Mode: Cycle-Reset | Base: 10
+[2026-02-17 13:56:30] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-17 13:56:30] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-17 13:56:30] [INFO] Bot started. Press Ctrl+C in terminal to stop.
+[2026-02-17 13:56:31] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-17 13:56:32] [INFO] Initial Balance Check: 4.0
+[2026-02-17 17:33:51] [INFO] Starting in HEADLESS mode...
+[2026-02-17 17:33:51] [INFO] Bot Initialized. Pattern: B | Mode: Cycle-Reset | Base: 10
+[2026-02-17 17:33:54] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-17 17:33:54] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-17 17:33:54] [INFO] Bot started. Press Ctrl+C in terminal to stop.
+[2026-02-17 17:33:56] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-17 17:33:57] [INFO] Initial Balance Check: 4.0
+[2026-02-17 18:00:36] [INFO] Bot Initialized. Pattern: PPPB | Mode: Cycle-Reset | Base: 10
+[2026-02-17 18:00:37] [WARNING] REMOTE UPDATE: Pattern changed from PPPB -> B
+[2026-02-17 18:00:37] [WARNING] REMOTE UPDATE: Base Bet (Level) changed from 10 -> 1
+[2026-02-17 18:00:37] [WARNING] REMOTE UPDATE: Target Balance changed from None -> 1000
+[2026-02-17 18:00:37] [SUCCESS] REMOTE COMMAND: TRUE (RUN) received. Resuming bot cycle...
+[2026-02-17 18:00:37] [INFO] Bot session active. Listening for commands...
+[2026-02-17 18:00:38] [INFO] Initial Balance Check: Unknown
+[2026-02-17 18:00:38] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:00:41] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:00:43] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:00:46] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:00:48] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:00:55] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:00:57] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:00:59] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:01:02] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:01:06] [ERROR] REMOTE COMMAND: FALSE (STOP) received. Bot entering IDLE mode.
+[2026-02-17 18:01:06] [DEBUG] Main Region OCR Read: 'ntering idle m'
+[2026-02-17 18:01:24] [SUCCESS] REMOTE COMMAND: TRUE (RUN) received. Resuming bot cycle...
+[2026-02-17 18:01:26] [DEBUG] Main Region OCR Read: 'ntering idle m
+
+ng bot cycle.'
+[2026-02-17 18:01:28] [DEBUG] Main Region OCR Read: 'ntering idle m
+
+ng bot cycle.'
+[2026-02-17 18:01:31] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:01:33] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:01:35] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:01:37] [DEBUG] Main Region OCR Read: 'ing! just restart yo
+3t will start in a cor
+own.
+
+ify the startup en'
+[2026-02-17 18:01:38] [SUCCESS] REMOTE COMMAND: TRUE (RUN) received. Resuming bot cycle...
+[2026-02-17 18:01:38] [INFO] Stopping bot...
+[2026-02-17 18:01:38] [INFO] Bot stopped.

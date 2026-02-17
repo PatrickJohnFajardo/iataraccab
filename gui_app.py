@@ -74,26 +74,33 @@ class BaccaratGUI:
         # Pattern
         self.pattern_label = tk.Label(self.config_frame, text="Pattern:", fg="#ecf0f1", bg="#2c3e50")
         self.pattern_label.grid(row=2, column=0, sticky=tk.W, padx=10, pady=5)
+        self.pattern_options = ["All P", "All B", "PB", "BP", "PPPB", "BBBP"]
         self.pattern_var = tk.StringVar(value="PPPB")
-        self.pattern_entry = ttk.Entry(self.config_frame, textvariable=self.pattern_var, width=20)
-        self.pattern_entry.grid(row=2, column=1, sticky=tk.W, padx=10, pady=5)
+        self.pattern_combo = ttk.Combobox(self.config_frame, textvariable=self.pattern_var, values=self.pattern_options, width=17)
+        self.pattern_combo.grid(row=2, column=1, sticky=tk.W, padx=10, pady=5)
         
         # Side (For Standard mode)
         self.side_label = tk.Label(self.config_frame, text="Bet Side:", fg="#ecf0f1", bg="#2c3e50")
         self.side_var = tk.StringVar(value="Banker")
         self.side_combo = ttk.Combobox(self.config_frame, textvariable=self.side_var, values=["Banker", "Player"], state="readonly")
 
-        # Target Balance
-        tk.Label(self.config_frame, text="Target Balance:", fg="#ecf0f1", bg="#2c3e50").grid(row=3, column=0, sticky=tk.W, padx=10, pady=5)
-        self.target_balance_var = tk.StringVar(value="")
-        self.target_balance_entry = ttk.Entry(self.config_frame, textvariable=self.target_balance_var, width=20)
-        self.target_balance_entry.grid(row=3, column=1, sticky=tk.W, padx=10, pady=5)
+        # Strategy (Tank, Sweeper, etc.)
+        tk.Label(self.config_frame, text="Strategy:", fg="#ecf0f1", bg="#2c3e50").grid(row=3, column=0, sticky=tk.W, padx=10, pady=5)
+        self.strategy_var = tk.StringVar(value="Standard")
+        self.strategy_combo = ttk.Combobox(self.config_frame, textvariable=self.strategy_var, values=["Standard", "Tank", "Sweeper"], state="readonly")
+        self.strategy_combo.grid(row=3, column=1, sticky=tk.W, padx=10, pady=5)
+
+        # Target Profit %
+        tk.Label(self.config_frame, text="Target Profit %:", fg="#ecf0f1", bg="#2c3e50").grid(row=4, column=0, sticky=tk.W, padx=10, pady=5)
+        self.target_pct_var = tk.StringVar(value="10") # Default to 10%
+        self.target_pct_entry = ttk.Entry(self.config_frame, textvariable=self.target_pct_var, width=10)
+        self.target_pct_entry.grid(row=4, column=1, sticky=tk.W, padx=10, pady=5)
 
         # Max Martingale Level
-        tk.Label(self.config_frame, text="Max Martingale Level:", fg="#ecf0f1", bg="#2c3e50").grid(row=4, column=0, sticky=tk.W, padx=10, pady=5)
-        self.max_level_var = tk.StringVar(value="6")
+        tk.Label(self.config_frame, text="Max Martingale Level:", fg="#ecf0f1", bg="#2c3e50").grid(row=5, column=0, sticky=tk.W, padx=10, pady=5)
+        self.max_level_var = tk.StringVar(value="10")
         self.max_level_entry = ttk.Entry(self.config_frame, textvariable=self.max_level_var, width=10)
-        self.max_level_entry.grid(row=4, column=1, sticky=tk.W, padx=10, pady=5)
+        self.max_level_entry.grid(row=5, column=1, sticky=tk.W, padx=10, pady=5)
 
         # Initial Toggle
         self.toggle_mode_fields()
@@ -181,13 +188,13 @@ class BaccaratGUI:
             self.side_label.grid_remove()
             self.side_combo.grid_remove()
             self.pattern_label.grid(row=2, column=0, sticky=tk.W, padx=10, pady=5)
-            self.pattern_entry.grid(row=2, column=1, sticky=tk.W, padx=10, pady=5)
+            self.pattern_combo.grid(row=2, column=1, sticky=tk.W, padx=10, pady=5)
 
 
     def enable_bot_controls(self):
         self.start_btn.config(state=tk.NORMAL)
         self.base_bet_entry.config(state=tk.NORMAL)
-        self.pattern_entry.config(state=tk.NORMAL)
+        self.pattern_combo.config(state="normal")
         self.mode_combo.config(state="readonly")
 
     def disable_bot_controls(self):
@@ -199,18 +206,22 @@ class BaccaratGUI:
             messagebox.showerror("Input Error", "Base Bet must be a number.")
             return
             
-        pattern = self.pattern_var.get().strip().upper()
+        pattern = self.pattern_var.get().strip()
+        # Map descriptive labels to actual logic
+        if pattern.upper() == "ALL P": pattern = "P"
+        elif pattern.upper() == "ALL B": pattern = "B"
+        
         if not pattern:
             messagebox.showerror("Input Error", "Pattern cannot be empty.")
             return
 
-        target_balance = None
-        tb_val = self.target_balance_var.get().strip()
-        if tb_val:
+        target_pct = None
+        pct_val = self.target_pct_var.get().strip()
+        if pct_val:
             try:
-                target_balance = float(tb_val)
+                target_pct = float(pct_val)
             except ValueError:
-                messagebox.showerror("Input Error", "Target Balance must be a number.")
+                messagebox.showerror("Input Error", "Target Profit % must be a number.")
                 return
 
         max_level = self.max_level_var.get()
@@ -221,7 +232,6 @@ class BaccaratGUI:
         reset_on_cycle = (self.mode_var.get() == "Sequence")
         
         if self.mode_var.get() == "Standard Martingale":
-            # In standard mode, the 'pattern' is just the target side (B or P)
             pattern = "B" if self.side_var.get() == "Banker" else "P"
             reset_on_cycle = False
 
@@ -229,8 +239,9 @@ class BaccaratGUI:
             base_bet=int(base_bet), 
             pattern_string=pattern, 
             reset_on_cycle=reset_on_cycle, 
-            target_balance=target_balance,
-            max_level=int(max_level)
+            target_percentage=target_pct,
+            max_level=int(max_level),
+            strategy=self.strategy_var.get()
         )
         
         self.is_running = True
