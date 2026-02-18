@@ -38126,3 +38126,497 @@ ify the startup en'
 [2026-02-17 18:01:38] [SUCCESS] REMOTE COMMAND: TRUE (RUN) received. Resuming bot cycle...
 [2026-02-17 18:01:38] [INFO] Stopping bot...
 [2026-02-17 18:01:38] [INFO] Bot stopped.
+[2026-02-17 19:08:45] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard | Target: 200.0%
+[2026-02-17 19:08:47] [WARNING] REMOTE UPDATE: Base Bet changed from 10 -> 1
+[2026-02-17 19:08:47] [WARNING] REMOTE UPDATE: Target % changed from 200.0 -> 1000
+[2026-02-17 19:08:47] [SUCCESS] REMOTE COMMAND: RUN received.
+[2026-02-17 19:08:47] [INFO] Bot session active. Listening for commands...
+[2026-02-17 19:08:48] [INFO] Session Started. Capital: 4.0 | Target: 44.0 (1000.0%)
+[2026-02-17 19:08:57] [WARNING] REMOTE UPDATE: Pattern changed from PPPB -> BBBP
+[2026-02-17 19:09:19] [WARNING] REMOTE UPDATE: Pattern changed from BBBP -> P
+[2026-02-17 19:11:23] [SUCCESS] REMOTE COMMAND: RUN received.
+[2026-02-17 19:11:23] [INFO] Stopping bot...
+[2026-02-17 19:11:23] [INFO] Bot stopped.
+[2026-02-17 20:42:11] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 20:42:13] [INFO] Bot session active. Listening for commands...
+[2026-02-17 20:42:28] [INFO] Stopping bot...
+[2026-02-17 20:42:29] [INFO] Bot stopped.
+[2026-02-17 20:42:30] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 20:42:31] [INFO] Bot session active. Listening for commands...
+[2026-02-17 20:48:50] [INFO] Stopping bot...
+[2026-02-17 20:48:50] [INFO] Bot stopped.
+[2026-02-17 21:24:54] [WARNING] CALIBRATION STARTED: Watch the logs for instructions.
+[2026-02-17 21:24:54] [INFO] Starting Calibration Phase...
+[2026-02-17 21:24:54] [DEBUG] HINT: You can use the GUI 'Next' button or SPACE key (if bound).
+[2026-02-17 21:24:54] [INFO] Calibrating: Target A (Banker)
+[2026-02-17 21:24:54] [WARNING] Please hover your mouse over Target A (Banker) and press 'Next/Space'.
+[2026-02-17 21:24:59] [SUCCESS] Recorded Target A (Banker) at (1094, 1004)
+[2026-02-17 21:24:59] [INFO] Calibrating: Target B (Player)
+[2026-02-17 21:24:59] [WARNING] Please hover your mouse over Target B (Player) and press 'Next/Space'.
+[2026-02-17 21:25:00] [SUCCESS] Recorded Target B (Player) at (819, 1005)
+[2026-02-17 21:25:00] [INFO] Calibrating: Target C (Tie)
+[2026-02-17 21:25:00] [WARNING] Please hover your mouse over Target C (Tie) and press 'Next/Space'.
+[2026-02-17 21:25:04] [SUCCESS] Recorded Target C (Tie) at (958, 999)
+[2026-02-17 21:25:04] [INFO] Calibrating Region: Main Status Region
+[2026-02-17 21:25:04] [WARNING] Step 1: Hover over TOP-LEFT of Main Status Region and press 'Next/Space'.
+[2026-02-17 21:26:17] [SUCCESS] Top-Left recorded at (857, 417)
+[2026-02-17 21:26:17] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Main Status Region and press 'Next/Space'.
+[2026-02-17 21:26:18] [SUCCESS] Bottom-Right recorded at (1051, 465)
+[2026-02-17 21:26:18] [INFO] Calibrating Region: Tie Status Region
+[2026-02-17 21:26:18] [WARNING] Step 1: Hover over TOP-LEFT of Tie Status Region and press 'Next/Space'.
+[2026-02-17 21:26:45] [SUCCESS] Top-Left recorded at (855, 363)
+[2026-02-17 21:26:45] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Tie Status Region and press 'Next/Space'.
+[2026-02-17 21:26:47] [SUCCESS] Bottom-Right recorded at (1070, 411)
+[2026-02-17 21:26:47] [INFO] Calibrating Region: Balance Status Region
+[2026-02-17 21:26:47] [WARNING] Step 1: Hover over TOP-LEFT of Balance Status Region and press 'Next/Space'.
+[2026-02-17 21:27:00] [SUCCESS] Top-Left recorded at (62, 1145)
+[2026-02-17 21:27:00] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Balance Status Region and press 'Next/Space'.
+[2026-02-17 21:27:02] [SUCCESS] Bottom-Right recorded at (156, 1183)
+[2026-02-17 21:27:02] [INFO] --- Calibrating Chips ---
+[2026-02-17 21:27:02] [INFO] Calibrating: Chip [10]
+[2026-02-17 21:27:02] [WARNING] Please hover your mouse over Chip [10] and press 'Next/Space'.
+[2026-02-17 21:27:18] [SUCCESS] Recorded Chip [10] at (747, 1162)
+[2026-02-17 21:27:18] [INFO] Calibrating: Chip [50]
+[2026-02-17 21:27:18] [WARNING] Please hover your mouse over Chip [50] and press 'Next/Space'.
+[2026-02-17 21:27:19] [SUCCESS] Recorded Chip [50] at (809, 1167)
+[2026-02-17 21:27:19] [INFO] Calibrating: Chip [100]
+[2026-02-17 21:27:19] [WARNING] Please hover your mouse over Chip [100] and press 'Next/Space'.
+[2026-02-17 21:28:07] [SUCCESS] Recorded Chip [100] at (868, 1166)
+[2026-02-17 21:28:07] [INFO] Calibrating: Chip [250]
+[2026-02-17 21:28:07] [WARNING] Please hover your mouse over Chip [250] and press 'Next/Space'.
+[2026-02-17 21:28:08] [SUCCESS] Recorded Chip [250] at (929, 1167)
+[2026-02-17 21:28:08] [INFO] Calibrating: Chip [1250]
+[2026-02-17 21:28:08] [WARNING] Please hover your mouse over Chip [1250] and press 'Next/Space'.
+[2026-02-17 21:28:08] [SUCCESS] Recorded Chip [1250] at (985, 1166)
+[2026-02-17 21:28:08] [INFO] Calibrating: Chip [5000]
+[2026-02-17 21:28:08] [WARNING] Please hover your mouse over Chip [5000] and press 'Next/Space'.
+[2026-02-17 21:28:09] [SUCCESS] Recorded Chip [5000] at (1056, 1166)
+[2026-02-17 21:28:09] [INFO] Calibrating: Chip [12500]
+[2026-02-17 21:28:09] [WARNING] Please hover your mouse over Chip [12500] and press 'Next/Space'.
+[2026-02-17 21:28:29] [SUCCESS] Recorded Chip [12500] at (1114, 1170)
+[2026-02-17 21:28:29] [INFO] Calibrating: Chip [50000]
+[2026-02-17 21:28:29] [WARNING] Please hover your mouse over Chip [50000] and press 'Next/Space'.
+[2026-02-17 21:28:30] [SUCCESS] Recorded Chip [50000] at (1167, 1168)
+[2026-02-17 21:28:30] [INFO] --- Capturing Color Baselines ---
+[2026-02-17 21:28:30] [WARNING] Ensure buttons are currently CLICKABLE.
+[2026-02-17 21:28:52] [INFO] Baseline color for Target A: (160, 5, 21)
+[2026-02-17 21:28:52] [INFO] Baseline color for Target B: (5, 47, 129)
+[2026-02-17 21:28:52] [INFO] Baseline color for Target C: (5, 103, 24)
+[2026-02-17 21:28:52] [SUCCESS] Calibration complete. Configuration saved.
+[2026-02-17 21:28:52] [SUCCESS] CALIBRATION FINISHED
+[2026-02-17 21:28:56] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:28:56] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:28:56] [SUCCESS] GOAL REACHED!
+[2026-02-17 21:30:45] [INFO] Stopping bot...
+[2026-02-17 21:30:45] [INFO] Bot stopped.
+[2026-02-17 21:30:49] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:30:49] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:31:18] [SUCCESS] GOAL REACHED!
+[2026-02-17 21:31:28] [INFO] Stopping bot...
+[2026-02-17 21:31:28] [INFO] Bot stopped.
+[2026-02-17 21:34:51] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:34:51] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:35:03] [SUCCESS] GOAL REACHED!
+[2026-02-17 21:35:21] [INFO] Stopping bot...
+[2026-02-17 21:35:22] [INFO] Bot stopped.
+[2026-02-17 21:35:23] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:35:23] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:35:38] [SUCCESS] GOAL REACHED!
+[2026-02-17 21:35:57] [INFO] Stopping bot...
+[2026-02-17 21:35:57] [INFO] Bot stopped.
+[2026-02-17 21:36:05] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:36:05] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:36:15] [SUCCESS] Outcome: BANKER
+[2026-02-17 21:36:20] [INFO] Result: LOSS
+[2026-02-17 21:36:38] [SUCCESS] Outcome: PLAYER
+[2026-02-17 21:36:43] [INFO] Result: WIN
+[2026-02-17 21:36:49] [INFO] Stopping bot...
+[2026-02-17 21:36:50] [INFO] Bot stopped.
+[2026-02-17 21:37:21] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:37:21] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:37:22] [SUCCESS] GOAL REACHED!
+[2026-02-17 21:37:26] [INFO] Stopping bot...
+[2026-02-17 21:37:27] [INFO] Bot stopped.
+[2026-02-17 21:39:15] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:39:15] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:39:15] [SUCCESS] GOAL REACHED!
+[2026-02-17 21:39:19] [INFO] Stopping bot...
+[2026-02-17 21:39:19] [INFO] Bot stopped.
+[2026-02-17 21:39:59] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:39:59] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:39:59] [SUCCESS] GOAL REACHED!
+[2026-02-17 21:40:05] [INFO] Stopping bot...
+[2026-02-17 21:40:06] [INFO] Bot stopped.
+[2026-02-17 21:40:07] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:40:07] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:40:07] [SUCCESS] GOAL REACHED!
+[2026-02-17 21:40:09] [INFO] Stopping bot...
+[2026-02-17 21:40:10] [INFO] Bot stopped.
+[2026-02-17 21:40:13] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-17 21:40:13] [INFO] Bot session active. Listening for commands...
+[2026-02-17 21:40:35] [SUCCESS] Outcome: BANKER
+[2026-02-17 21:40:40] [INFO] Result: LOSS
+[2026-02-17 21:40:59] [SUCCESS] Outcome: PLAYER
+[2026-02-17 21:41:04] [INFO] Result: WIN
+[2026-02-17 21:41:23] [SUCCESS] Outcome: PLAYER
+[2026-02-17 21:41:27] [INFO] Stopping bot...
+[2026-02-17 21:41:28] [INFO] Result: WIN
+[2026-02-17 21:41:32] [INFO] Bot stopped.
+[2026-02-18 10:07:40] [INFO] Starting in HEADLESS mode...
+[2026-02-18 10:07:40] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 12:57:28] [INFO] Starting in HEADLESS mode...
+[2026-02-18 12:57:28] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 13:42:05] [INFO] Starting in HEADLESS mode...
+[2026-02-18 13:42:05] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 16:13:46] [INFO] Bot Initialized. Pattern: PPPB | Strategy: Standard
+[2026-02-18 16:13:46] [INFO] Bot session active. Listening for commands...
+[2026-02-18 16:14:18] [INFO] Stopping bot...
+[2026-02-18 16:14:19] [INFO] Bot stopped.
+[2026-02-18 16:17:41] [SUCCESS] Outcome: PLAYER
+[2026-02-18 16:17:46] [INFO] Result: LOSS
+[2026-02-18 16:20:40] [WARNING] CALIBRATION STARTED: Watch the logs for instructions.
+[2026-02-18 16:20:40] [INFO] Starting Calibration Phase...
+[2026-02-18 16:20:40] [DEBUG] HINT: You can use the GUI 'Next' button or SPACE key (if bound).
+[2026-02-18 16:20:40] [INFO] Calibrating: Target A (Banker)
+[2026-02-18 16:20:40] [WARNING] Please hover your mouse over Target A (Banker) and press 'Next/Space'.
+[2026-02-18 16:20:47] [SUCCESS] Recorded Target A (Banker) at (1171, 988)
+[2026-02-18 16:20:47] [INFO] Calibrating: Target B (Player)
+[2026-02-18 16:20:47] [WARNING] Please hover your mouse over Target B (Player) and press 'Next/Space'.
+[2026-02-18 16:20:49] [SUCCESS] Recorded Target B (Player) at (751, 986)
+[2026-02-18 16:20:49] [INFO] Calibrating: Target C (Tie)
+[2026-02-18 16:20:49] [WARNING] Please hover your mouse over Target C (Tie) and press 'Next/Space'.
+[2026-02-18 16:20:50] [SUCCESS] Recorded Target C (Tie) at (958, 989)
+[2026-02-18 16:20:50] [INFO] Calibrating Region: Main Status Region
+[2026-02-18 16:20:50] [WARNING] Step 1: Hover over TOP-LEFT of Main Status Region and press 'Next/Space'.
+[2026-02-18 16:20:56] [SUCCESS] Top-Left recorded at (812, 415)
+[2026-02-18 16:20:56] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Main Status Region and press 'Next/Space'.
+[2026-02-18 16:20:59] [SUCCESS] Bottom-Right recorded at (1102, 464)
+[2026-02-18 16:20:59] [INFO] Calibrating Region: Tie Status Region
+[2026-02-18 16:20:59] [WARNING] Step 1: Hover over TOP-LEFT of Tie Status Region and press 'Next/Space'.
+[2026-02-18 16:21:14] [SUCCESS] Top-Left recorded at (802, 354)
+[2026-02-18 16:21:14] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Tie Status Region and press 'Next/Space'.
+[2026-02-18 16:21:21] [SUCCESS] Bottom-Right recorded at (1113, 413)
+[2026-02-18 16:21:21] [INFO] Calibrating Region: Balance Status Region
+[2026-02-18 16:21:21] [WARNING] Step 1: Hover over TOP-LEFT of Balance Status Region and press 'Next/Space'.
+[2026-02-18 16:21:29] [SUCCESS] Top-Left recorded at (64, 1146)
+[2026-02-18 16:21:29] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Balance Status Region and press 'Next/Space'.
+[2026-02-18 16:21:36] [SUCCESS] Bottom-Right recorded at (175, 1190)
+[2026-02-18 16:21:36] [INFO] --- Calibrating Chips ---
+[2026-02-18 16:21:36] [INFO] Calibrating: Chip [10]
+[2026-02-18 16:21:36] [WARNING] Please hover your mouse over Chip [10] and press 'Next/Space'.
+[2026-02-18 16:21:51] [SUCCESS] Recorded Chip [10] at (745, 1168)
+[2026-02-18 16:21:51] [INFO] Calibrating: Chip [50]
+[2026-02-18 16:21:51] [WARNING] Please hover your mouse over Chip [50] and press 'Next/Space'.
+[2026-02-18 16:21:52] [SUCCESS] Recorded Chip [50] at (806, 1169)
+[2026-02-18 16:21:52] [INFO] Calibrating: Chip [100]
+[2026-02-18 16:21:52] [WARNING] Please hover your mouse over Chip [100] and press 'Next/Space'.
+[2026-02-18 16:21:53] [SUCCESS] Recorded Chip [100] at (865, 1167)
+[2026-02-18 16:21:53] [INFO] Calibrating: Chip [250]
+[2026-02-18 16:21:53] [WARNING] Please hover your mouse over Chip [250] and press 'Next/Space'.
+[2026-02-18 16:21:54] [SUCCESS] Recorded Chip [250] at (927, 1164)
+[2026-02-18 16:21:54] [INFO] Calibrating: Chip [1250]
+[2026-02-18 16:21:54] [WARNING] Please hover your mouse over Chip [1250] and press 'Next/Space'.
+[2026-02-18 16:21:55] [SUCCESS] Recorded Chip [1250] at (988, 1164)
+[2026-02-18 16:21:55] [INFO] Calibrating: Chip [5000]
+[2026-02-18 16:21:55] [WARNING] Please hover your mouse over Chip [5000] and press 'Next/Space'.
+[2026-02-18 16:21:57] [SUCCESS] Recorded Chip [5000] at (1049, 1169)
+[2026-02-18 16:21:57] [INFO] Calibrating: Chip [12500]
+[2026-02-18 16:21:57] [WARNING] Please hover your mouse over Chip [12500] and press 'Next/Space'.
+[2026-02-18 16:21:57] [SUCCESS] Recorded Chip [12500] at (1117, 1169)
+[2026-02-18 16:21:57] [INFO] Calibrating: Chip [50000]
+[2026-02-18 16:21:57] [WARNING] Please hover your mouse over Chip [50000] and press 'Next/Space'.
+[2026-02-18 16:21:58] [SUCCESS] Recorded Chip [50000] at (1166, 1168)
+[2026-02-18 16:21:58] [INFO] --- Capturing Color Baselines ---
+[2026-02-18 16:21:58] [WARNING] Ensure buttons are currently CLICKABLE.
+[2026-02-18 16:22:10] [INFO] Baseline color for Target A: (183, 7, 25)
+[2026-02-18 16:22:10] [INFO] Baseline color for Target B: (5, 38, 102)
+[2026-02-18 16:22:10] [INFO] Baseline color for Target C: (3, 55, 14)
+[2026-02-18 16:22:10] [SUCCESS] Calibration complete. Configuration saved.
+[2026-02-18 16:22:10] [SUCCESS] CALIBRATION FINISHED
+[2026-02-18 16:22:22] [WARNING] CALIBRATION STARTED: Watch the logs for instructions.
+[2026-02-18 16:22:22] [INFO] Starting Calibration Phase...
+[2026-02-18 16:22:22] [DEBUG] HINT: You can use the GUI 'Next' button or SPACE key (if bound).
+[2026-02-18 16:22:22] [INFO] Calibrating: Target A (Banker)
+[2026-02-18 16:22:22] [WARNING] Please hover your mouse over Target A (Banker) and press 'Next/Space'.
+[2026-02-18 16:22:27] [SUCCESS] Recorded Target A (Banker) at (1165, 1003)
+[2026-02-18 16:22:27] [INFO] Calibrating: Target B (Player)
+[2026-02-18 16:22:27] [WARNING] Please hover your mouse over Target B (Player) and press 'Next/Space'.
+[2026-02-18 16:22:28] [SUCCESS] Recorded Target B (Player) at (745, 1007)
+[2026-02-18 16:22:28] [INFO] Calibrating: Target C (Tie)
+[2026-02-18 16:22:28] [WARNING] Please hover your mouse over Target C (Tie) and press 'Next/Space'.
+[2026-02-18 16:22:29] [SUCCESS] Recorded Target C (Tie) at (1013, 1003)
+[2026-02-18 16:22:29] [INFO] Calibrating Region: Main Status Region
+[2026-02-18 16:22:29] [WARNING] Step 1: Hover over TOP-LEFT of Main Status Region and press 'Next/Space'.
+[2026-02-18 16:22:35] [SUCCESS] Top-Left recorded at (815, 411)
+[2026-02-18 16:22:35] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Main Status Region and press 'Next/Space'.
+[2026-02-18 16:22:38] [SUCCESS] Bottom-Right recorded at (1101, 467)
+[2026-02-18 16:22:38] [INFO] Calibrating Region: Tie Status Region
+[2026-02-18 16:22:38] [WARNING] Step 1: Hover over TOP-LEFT of Tie Status Region and press 'Next/Space'.
+[2026-02-18 16:22:41] [SUCCESS] Top-Left recorded at (801, 353)
+[2026-02-18 16:22:41] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Tie Status Region and press 'Next/Space'.
+[2026-02-18 16:22:43] [SUCCESS] Bottom-Right recorded at (1113, 413)
+[2026-02-18 16:22:43] [INFO] Calibrating Region: Balance Status Region
+[2026-02-18 16:22:43] [WARNING] Step 1: Hover over TOP-LEFT of Balance Status Region and press 'Next/Space'.
+[2026-02-18 16:22:50] [SUCCESS] Top-Left recorded at (64, 1146)
+[2026-02-18 16:22:50] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Balance Status Region and press 'Next/Space'.
+[2026-02-18 16:22:53] [SUCCESS] Bottom-Right recorded at (173, 1190)
+[2026-02-18 16:22:53] [INFO] --- Calibrating Chips ---
+[2026-02-18 16:22:53] [INFO] Calibrating: Chip [10]
+[2026-02-18 16:22:53] [WARNING] Please hover your mouse over Chip [10] and press 'Next/Space'.
+[2026-02-18 16:23:08] [SUCCESS] Recorded Chip [10] at (746, 1163)
+[2026-02-18 16:23:08] [INFO] Calibrating: Chip [50]
+[2026-02-18 16:23:08] [WARNING] Please hover your mouse over Chip [50] and press 'Next/Space'.
+[2026-02-18 16:23:09] [SUCCESS] Recorded Chip [50] at (806, 1166)
+[2026-02-18 16:23:09] [INFO] Calibrating: Chip [100]
+[2026-02-18 16:23:09] [WARNING] Please hover your mouse over Chip [100] and press 'Next/Space'.
+[2026-02-18 16:23:10] [SUCCESS] Recorded Chip [100] at (870, 1163)
+[2026-02-18 16:23:10] [INFO] Calibrating: Chip [250]
+[2026-02-18 16:23:10] [WARNING] Please hover your mouse over Chip [250] and press 'Next/Space'.
+[2026-02-18 16:23:11] [SUCCESS] Recorded Chip [250] at (936, 1163)
+[2026-02-18 16:23:11] [INFO] Calibrating: Chip [1250]
+[2026-02-18 16:23:11] [WARNING] Please hover your mouse over Chip [1250] and press 'Next/Space'.
+[2026-02-18 16:23:11] [SUCCESS] Recorded Chip [1250] at (983, 1162)
+[2026-02-18 16:23:11] [INFO] Calibrating: Chip [5000]
+[2026-02-18 16:23:11] [WARNING] Please hover your mouse over Chip [5000] and press 'Next/Space'.
+[2026-02-18 16:23:12] [SUCCESS] Recorded Chip [5000] at (1044, 1162)
+[2026-02-18 16:23:12] [INFO] Calibrating: Chip [12500]
+[2026-02-18 16:23:12] [WARNING] Please hover your mouse over Chip [12500] and press 'Next/Space'.
+[2026-02-18 16:23:13] [SUCCESS] Recorded Chip [12500] at (1108, 1163)
+[2026-02-18 16:23:13] [INFO] Calibrating: Chip [50000]
+[2026-02-18 16:23:13] [WARNING] Please hover your mouse over Chip [50000] and press 'Next/Space'.
+[2026-02-18 16:23:14] [SUCCESS] Recorded Chip [50000] at (1165, 1163)
+[2026-02-18 16:23:14] [INFO] --- Capturing Color Baselines ---
+[2026-02-18 16:23:14] [WARNING] Ensure buttons are currently CLICKABLE.
+[2026-02-18 16:23:33] [INFO] Baseline color for Target A: (150, 4, 19)
+[2026-02-18 16:23:33] [INFO] Baseline color for Target B: (11, 51, 127)
+[2026-02-18 16:23:33] [INFO] Baseline color for Target C: (5, 88, 16)
+[2026-02-18 16:23:33] [SUCCESS] Calibration complete. Configuration saved.
+[2026-02-18 16:23:33] [SUCCESS] CALIBRATION FINISHED
+[2026-02-18 16:28:14] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 16:28:16] [SUCCESS] Bot Registered as: PC-Josh
+[2026-02-18 16:28:59] [INFO] Bot session active. Listening for commands...
+[2026-02-18 16:29:39] [SUCCESS] Outcome: PLAYER
+[2026-02-18 16:29:44] [INFO] Result: WIN
+[2026-02-18 16:29:55] [INFO] Stopping bot...
+[2026-02-18 16:29:56] [INFO] Bot stopped.
+[2026-02-18 16:53:35] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 16:53:37] [SUCCESS] Bot Registered as: PC-Josh
+[2026-02-18 16:57:09] [WARNING] CALIBRATION STARTED: Watch the logs for instructions.
+[2026-02-18 16:57:09] [INFO] Starting Calibration Phase...
+[2026-02-18 16:57:09] [DEBUG] HINT: You can use the GUI 'Next' button or SPACE key (if bound).
+[2026-02-18 16:57:09] [INFO] Calibrating: Target A (Banker)
+[2026-02-18 16:57:09] [WARNING] Please hover your mouse over Target A (Banker) and press 'Next/Space'.
+[2026-02-18 16:57:12] [SUCCESS] Recorded Target A (Banker) at (1166, 994)
+[2026-02-18 16:57:12] [INFO] Calibrating: Target B (Player)
+[2026-02-18 16:57:12] [WARNING] Please hover your mouse over Target B (Player) and press 'Next/Space'.
+[2026-02-18 16:57:14] [SUCCESS] Recorded Target B (Player) at (740, 992)
+[2026-02-18 16:57:14] [INFO] Calibrating: Target C (Tie)
+[2026-02-18 16:57:14] [WARNING] Please hover your mouse over Target C (Tie) and press 'Next/Space'.
+[2026-02-18 16:57:15] [SUCCESS] Recorded Target C (Tie) at (966, 1002)
+[2026-02-18 16:57:15] [INFO] Calibrating Region: Main Status Region
+[2026-02-18 16:57:15] [WARNING] Step 1: Hover over TOP-LEFT of Main Status Region and press 'Next/Space'.
+[2026-02-18 16:57:20] [SUCCESS] Top-Left recorded at (813, 415)
+[2026-02-18 16:57:20] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Main Status Region and press 'Next/Space'.
+[2026-02-18 16:57:23] [SUCCESS] Bottom-Right recorded at (1103, 466)
+[2026-02-18 16:57:23] [INFO] Calibrating Region: Tie Status Region
+[2026-02-18 16:57:23] [WARNING] Step 1: Hover over TOP-LEFT of Tie Status Region and press 'Next/Space'.
+[2026-02-18 16:57:33] [SUCCESS] Top-Left recorded at (799, 357)
+[2026-02-18 16:57:33] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Tie Status Region and press 'Next/Space'.
+[2026-02-18 16:57:37] [SUCCESS] Bottom-Right recorded at (1104, 417)
+[2026-02-18 16:57:37] [INFO] Calibrating Region: Balance Status Region
+[2026-02-18 16:57:37] [WARNING] Step 1: Hover over TOP-LEFT of Balance Status Region and press 'Next/Space'.
+[2026-02-18 16:57:56] [SUCCESS] Top-Left recorded at (63, 1145)
+[2026-02-18 16:57:56] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Balance Status Region and press 'Next/Space'.
+[2026-02-18 16:58:00] [SUCCESS] Bottom-Right recorded at (175, 1189)
+[2026-02-18 16:58:00] [INFO] --- Calibrating Chips ---
+[2026-02-18 16:58:00] [INFO] Calibrating: Chip [10]
+[2026-02-18 16:58:00] [WARNING] Please hover your mouse over Chip [10] and press 'Next/Space'.
+[2026-02-18 16:58:40] [SUCCESS] Recorded Chip [10] at (751, 1163)
+[2026-02-18 16:58:40] [INFO] Calibrating: Chip [50]
+[2026-02-18 16:58:40] [WARNING] Please hover your mouse over Chip [50] and press 'Next/Space'.
+[2026-02-18 16:58:40] [SUCCESS] Recorded Chip [50] at (811, 1163)
+[2026-02-18 16:58:40] [INFO] Calibrating: Chip [100]
+[2026-02-18 16:58:40] [WARNING] Please hover your mouse over Chip [100] and press 'Next/Space'.
+[2026-02-18 16:59:01] [SUCCESS] Recorded Chip [100] at (866, 1170)
+[2026-02-18 16:59:01] [INFO] Calibrating: Chip [250]
+[2026-02-18 16:59:01] [WARNING] Please hover your mouse over Chip [250] and press 'Next/Space'.
+[2026-02-18 16:59:01] [SUCCESS] Recorded Chip [250] at (928, 1167)
+[2026-02-18 16:59:01] [INFO] Calibrating: Chip [1250]
+[2026-02-18 16:59:01] [WARNING] Please hover your mouse over Chip [1250] and press 'Next/Space'.
+[2026-02-18 17:01:52] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 17:01:53] [SUCCESS] Bot Registered as: PC-Josh
+[2026-02-18 17:02:01] [WARNING] CALIBRATION STARTED: Watch the logs for instructions.
+[2026-02-18 17:02:01] [INFO] Starting Calibration Phase...
+[2026-02-18 17:02:01] [DEBUG] HINT: You can use the GUI 'Next' button or SPACE key (if bound).
+[2026-02-18 17:02:01] [INFO] Calibrating: Target A (Banker)
+[2026-02-18 17:02:01] [WARNING] Please hover your mouse over Target A (Banker) and press 'Next/Space'.
+[2026-02-18 17:02:06] [SUCCESS] Recorded Target A (Banker) at (1163, 1000)
+[2026-02-18 17:02:06] [INFO] Calibrating: Target B (Player)
+[2026-02-18 17:02:06] [WARNING] Please hover your mouse over Target B (Player) and press 'Next/Space'.
+[2026-02-18 17:02:07] [SUCCESS] Recorded Target B (Player) at (756, 999)
+[2026-02-18 17:02:07] [INFO] Calibrating: Target C (Tie)
+[2026-02-18 17:02:07] [WARNING] Please hover your mouse over Target C (Tie) and press 'Next/Space'.
+[2026-02-18 17:02:08] [SUCCESS] Recorded Target C (Tie) at (967, 999)
+[2026-02-18 17:02:08] [INFO] Calibrating Region: Main Status Region
+[2026-02-18 17:02:08] [WARNING] Step 1: Hover over TOP-LEFT of Main Status Region and press 'Next/Space'.
+[2026-02-18 17:02:14] [SUCCESS] Top-Left recorded at (858, 417)
+[2026-02-18 17:02:14] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Main Status Region and press 'Next/Space'.
+[2026-02-18 17:02:34] [SUCCESS] Bottom-Right recorded at (1049, 467)
+[2026-02-18 17:02:34] [INFO] Calibrating Region: Tie Status Region
+[2026-02-18 17:02:34] [WARNING] Step 1: Hover over TOP-LEFT of Tie Status Region and press 'Next/Space'.
+[2026-02-18 17:02:41] [SUCCESS] Top-Left recorded at (799, 357)
+[2026-02-18 17:02:41] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Tie Status Region and press 'Next/Space'.
+[2026-02-18 17:02:44] [SUCCESS] Bottom-Right recorded at (1104, 415)
+[2026-02-18 17:02:44] [INFO] Calibrating Region: Balance Status Region
+[2026-02-18 17:02:44] [WARNING] Step 1: Hover over TOP-LEFT of Balance Status Region and press 'Next/Space'.
+[2026-02-18 17:02:51] [SUCCESS] Top-Left recorded at (63, 1145)
+[2026-02-18 17:02:51] [WARNING] Step 2: Hover over BOTTOM-RIGHT of Balance Status Region and press 'Next/Space'.
+[2026-02-18 17:02:55] [SUCCESS] Bottom-Right recorded at (174, 1190)
+[2026-02-18 17:02:55] [INFO] --- Calibrating Chips ---
+[2026-02-18 17:02:55] [INFO] Calibrating: Chip [10]
+[2026-02-18 17:02:55] [WARNING] Please hover your mouse over Chip [10] and press 'Next/Space'.
+[2026-02-18 17:03:01] [SUCCESS] Recorded Chip [10] at (753, 1167)
+[2026-02-18 17:03:01] [INFO] Calibrating: Chip [50]
+[2026-02-18 17:03:01] [WARNING] Please hover your mouse over Chip [50] and press 'Next/Space'.
+[2026-02-18 17:03:02] [SUCCESS] Recorded Chip [50] at (808, 1169)
+[2026-02-18 17:03:02] [INFO] Calibrating: Chip [100]
+[2026-02-18 17:03:02] [WARNING] Please hover your mouse over Chip [100] and press 'Next/Space'.
+[2026-02-18 17:03:03] [SUCCESS] Recorded Chip [100] at (874, 1164)
+[2026-02-18 17:03:03] [INFO] Calibrating: Chip [250]
+[2026-02-18 17:03:03] [WARNING] Please hover your mouse over Chip [250] and press 'Next/Space'.
+[2026-02-18 17:03:04] [SUCCESS] Recorded Chip [250] at (933, 1165)
+[2026-02-18 17:03:04] [INFO] Calibrating: Chip [500]
+[2026-02-18 17:03:04] [WARNING] Please hover your mouse over Chip [500] and press 'Next/Space'.
+[2026-02-18 17:03:04] [SUCCESS] Recorded Chip [500] at (984, 1167)
+[2026-02-18 17:03:04] [INFO] Calibrating: Chip [1000]
+[2026-02-18 17:03:04] [WARNING] Please hover your mouse over Chip [1000] and press 'Next/Space'.
+[2026-02-18 17:03:05] [SUCCESS] Recorded Chip [1000] at (1048, 1167)
+[2026-02-18 17:03:05] [INFO] Calibrating: Chip [5000]
+[2026-02-18 17:03:05] [WARNING] Please hover your mouse over Chip [5000] and press 'Next/Space'.
+[2026-02-18 17:03:06] [SUCCESS] Recorded Chip [5000] at (1108, 1170)
+[2026-02-18 17:03:06] [INFO] Calibrating: Chip [10000]
+[2026-02-18 17:03:06] [WARNING] Please hover your mouse over Chip [10000] and press 'Next/Space'.
+[2026-02-18 17:03:07] [SUCCESS] Recorded Chip [10000] at (1166, 1165)
+[2026-02-18 17:03:07] [INFO] --- Capturing Color Baselines ---
+[2026-02-18 17:03:07] [WARNING] Ensure buttons are currently CLICKABLE.
+[2026-02-18 17:03:24] [INFO] Baseline color for Target A: (152, 5, 20)
+[2026-02-18 17:03:24] [INFO] Baseline color for Target B: (16, 59, 137)
+[2026-02-18 17:03:24] [INFO] Baseline color for Target C: (19, 119, 37)
+[2026-02-18 17:03:24] [SUCCESS] Calibration complete. Configuration saved.
+[2026-02-18 17:03:24] [SUCCESS] CALIBRATION FINISHED
+[2026-02-18 17:04:06] [INFO] Bot session active. Listening for commands...
+[2026-02-18 17:04:08] [WARNING] SESSION STOP: Time limit of 1s reached.
+[2026-02-18 17:04:12] [INFO] Stopping bot...
+[2026-02-18 17:04:13] [INFO] Bot stopped.
+[2026-02-18 17:04:50] [INFO] Bot session active. Listening for commands...
+[2026-02-18 17:04:53] [WARNING] SESSION STOP: Time limit of 180s reached.
+[2026-02-18 17:05:01] [WARNING] SESSION STOP: Time limit of 180s reached.
+[2026-02-18 17:05:09] [WARNING] SESSION STOP: Time limit of 180s reached.
+[2026-02-18 17:05:09] [INFO] Stopping bot...
+[2026-02-18 17:05:09] [INFO] Bot stopped.
+[2026-02-18 17:11:36] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 17:11:37] [INFO] Starting bot (Remote Command)...
+[2026-02-18 17:11:37] [SUCCESS] Bot Registered as: PC-Josh
+[2026-02-18 17:11:54] [INFO] Bot session active. Listening for commands...
+[2026-02-18 17:12:59] [SUCCESS] Outcome: BANKER
+[2026-02-18 17:13:04] [INFO] Result: LOSS
+[2026-02-18 17:13:11] [INFO] Starting bot (Remote Command)...
+[2026-02-18 17:13:11] [INFO] Stopping bot...
+[2026-02-18 17:13:12] [INFO] Bot stopped.
+[2026-02-18 17:21:41] [INFO] Bot session active. Listening for commands...
+[2026-02-18 17:21:48] [SUCCESS] Outcome: PLAYER
+[2026-02-18 17:21:53] [INFO] Result: WIN
+[2026-02-18 17:22:14] [SUCCESS] Outcome: PLAYER
+[2026-02-18 17:22:19] [INFO] Result: WIN
+[2026-02-18 17:22:34] [SUCCESS] Outcome: PLAYER
+[2026-02-18 17:22:39] [INFO] Result: WIN
+[2026-02-18 17:22:59] [SUCCESS] Outcome: PLAYER
+[2026-02-18 17:23:04] [INFO] Result: LOSS
+[2026-02-18 17:23:24] [SUCCESS] Outcome: PLAYER
+[2026-02-18 17:23:29] [INFO] Result: WIN
+[2026-02-18 17:23:34] [INFO] Starting bot (Remote Command)...
+[2026-02-18 17:23:34] [INFO] Stopping bot...
+[2026-02-18 17:23:34] [INFO] Bot stopped.
+[2026-02-18 17:24:41] [INFO] Bot session active. Listening for commands...
+[2026-02-18 17:26:39] [INFO] Starting bot (Remote Command)...
+[2026-02-18 17:26:39] [INFO] Stopping bot...
+[2026-02-18 17:26:39] [INFO] Bot stopped.
+[2026-02-18 17:26:56] [INFO] Bot session active. Listening for commands...
+[2026-02-18 17:27:07] [SUCCESS] Outcome: BANKER
+[2026-02-18 17:27:12] [INFO] Result: LOSS
+[2026-02-18 17:27:19] [INFO] Starting bot (Remote Command)...
+[2026-02-18 17:27:19] [INFO] Stopping bot...
+[2026-02-18 17:27:19] [INFO] Bot stopped.
+[2026-02-18 17:45:33] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 17:45:34] [INFO] Starting bot (Remote Command)...
+[2026-02-18 17:45:34] [SUCCESS] Bot Registered as: PC-Josh
+[2026-02-18 17:50:46] [INFO] Bot session active. Listening for commands...
+[2026-02-18 17:50:48] [SUCCESS] Outcome: PLAYER
+[2026-02-18 17:50:53] [INFO] Result: WIN
+[2026-02-18 17:51:44] [SUCCESS] Outcome: PLAYER
+[2026-02-18 17:51:49] [INFO] Result: WIN
+[2026-02-18 17:52:12] [SUCCESS] Outcome: BANKER
+[2026-02-18 17:52:17] [INFO] Result: LOSS
+[2026-02-18 17:52:53] [INFO] Starting bot (Remote Command)...
+[2026-02-18 17:52:53] [INFO] Stopping bot...
+[2026-02-18 17:52:53] [INFO] Bot stopped.
+[2026-02-18 18:09:52] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 18:09:53] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:09:53] [SUCCESS] Bot Registered as: PC-Josh
+[2026-02-18 18:10:04] [INFO] Bot session active. Listening for commands...
+[2026-02-18 18:10:26] [SUCCESS] Outcome: BANKER
+[2026-02-18 18:10:27] [INFO] Result: LOSS
+[2026-02-18 18:10:48] [SUCCESS] Outcome: PLAYER
+[2026-02-18 18:10:49] [INFO] Result: WIN
+[2026-02-18 18:11:06] [WARNING] SESSION STOP: Time limit of 60s reached.
+[2026-02-18 18:11:12] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:11:14] [SUCCESS] Outcome: PLAYER
+[2026-02-18 18:11:15] [INFO] Result: WIN
+[2026-02-18 18:11:22] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:11:23] [INFO] Stopping bot...
+[2026-02-18 18:11:23] [INFO] Bot stopped.
+[2026-02-18 18:38:55] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 18:38:56] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:38:56] [SUCCESS] Bot Registered as: PC-Josh
+[2026-02-18 18:40:47] [INFO] Bot session active. Listening for commands...
+[2026-02-18 18:40:51] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:40:51] [INFO] Stopping bot...
+[2026-02-18 18:40:51] [INFO] Bot stopped.
+[2026-02-18 18:41:16] [INFO] Bot session active. Listening for commands...
+[2026-02-18 18:41:19] [SUCCESS] Outcome: PLAYER
+[2026-02-18 18:41:22] [INFO] Result: WIN
+[2026-02-18 18:41:42] [SUCCESS] Outcome: BANKER
+[2026-02-18 18:41:45] [INFO] Result: LOSS
+[2026-02-18 18:42:03] [SUCCESS] Outcome: BANKER
+[2026-02-18 18:42:06] [INFO] Result: LOSS
+[2026-02-18 18:42:17] [WARNING] SESSION STOP: Time limit of 60s reached.
+[2026-02-18 18:42:22] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:42:36] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:42:36] [INFO] Stopping bot...
+[2026-02-18 18:42:36] [INFO] Bot stopped.
+[2026-02-18 18:44:21] [INFO] Bot session active. Listening for commands...
+[2026-02-18 18:44:40] [SUCCESS] Outcome: PLAYER
+[2026-02-18 18:44:43] [INFO] Result: WIN
+[2026-02-18 18:45:15] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:45:15] [INFO] Stopping bot...
+[2026-02-18 18:45:15] [INFO] Bot stopped.
+[2026-02-18 18:56:39] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 18:56:40] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:56:40] [SUCCESS] Bot Registered as: PC-Josh
+[2026-02-18 18:57:08] [INFO] Bot session active. Listening for commands...
+[2026-02-18 18:57:14] [SUCCESS] Outcome: BANKER
+[2026-02-18 18:57:17] [INFO] Result: LOSS
+[2026-02-18 18:57:37] [SUCCESS] Outcome: BANKER
+[2026-02-18 18:57:40] [INFO] Result: LOSS
+[2026-02-18 18:58:00] [SUCCESS] Outcome: GENERIC_WIN
+[2026-02-18 18:58:03] [INFO] Result: WIN
+[2026-02-18 18:58:10] [WARNING] SESSION STOP: Time limit of 60s reached.
+[2026-02-18 18:58:16] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:58:21] [SUCCESS] Outcome: TIE
+[2026-02-18 18:58:24] [INFO] Result: PUSH
+[2026-02-18 18:58:34] [INFO] Starting bot (Remote Command)...
+[2026-02-18 18:58:34] [INFO] Stopping bot...
+[2026-02-18 18:58:34] [INFO] Bot stopped.
+[2026-02-18 20:22:06] [INFO] Bot Initialized. Pattern: B | Strategy: Standard
+[2026-02-18 20:22:07] [INFO] Starting bot (Remote Command)...
+[2026-02-18 20:22:07] [SUCCESS] Bot Registered as: PC-Josh

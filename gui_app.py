@@ -19,11 +19,12 @@ class BaccaratGUI:
         self.style = ttk.Style()
         self.style.theme_use('clam')
         
-        self.bot = None
-        self.bot_thread = None
         self.is_running = False
         self.is_calibrating = False
         self.calib_event = threading.Event()
+        
+        # Initialize bot on startup for immediate DB registration
+        self.initialize_bot_instance()
         
         self.setup_ui()
         self.bind_keys()
@@ -125,6 +126,9 @@ class BaccaratGUI:
         self.stop_btn = tk.Button(cntrl_frame, text="STOP BOT", command=self.stop_bot, state=tk.DISABLED, bg="#c0392b", fg="white", font=("Helvetica", 12, "bold"), width=15)
         self.stop_btn.pack(side=tk.LEFT, expand=True, padx=5)
         
+        self.test_btn = tk.Button(cntrl_frame, text="TEST CLICKS", command=self.test_bot_clicks, bg="#2980b9", fg="white", font=("Helvetica", 12, "bold"), width=15)
+        self.test_btn.pack(side=tk.LEFT, expand=True, padx=5)
+        
         self.enable_bot_controls() # Changed from disable_bot_controls to enable_bot_controls
 
     def setup_logging(self):
@@ -200,6 +204,15 @@ class BaccaratGUI:
     def disable_bot_controls(self):
         self.start_btn.config(state=tk.DISABLED)
 
+    def initialize_bot_instance(self):
+        """Creates the initial bot instance for monitoring/registration."""
+        try:
+            self.bot = Bot()
+            logger.log(f"Bot Registered as: {self.bot.pc_name}", "SUCCESS")
+        except Exception as e:
+            logger.log(f"Startup Monitoring Error: {e}", "DEBUG")
+            self.bot = None
+
     def start_bot_thread(self):
         base_bet = self.base_bet_var.get()
         if not base_bet.isdigit():
@@ -235,14 +248,24 @@ class BaccaratGUI:
             pattern = "B" if self.side_var.get() == "Banker" else "P"
             reset_on_cycle = False
 
-        self.bot = Bot(
-            base_bet=int(base_bet), 
-            pattern_string=pattern, 
-            reset_on_cycle=reset_on_cycle, 
-            target_percentage=target_pct,
-            max_level=int(max_level),
-            strategy=self.strategy_var.get()
-        )
+        # Update existing bot instance or create if failed earlier
+        if not self.bot:
+            self.initialize_bot_instance()
+            
+        if self.bot:
+            self.bot.base_bet = int(base_bet)
+            self.bot.current_bet = self.bot.base_bet
+            self.bot.pattern = pattern.upper().replace("-", "").replace(" ", "")
+            self.bot.reset_on_cycle = reset_on_cycle
+            self.bot.target_percentage = target_pct
+            self.bot.max_level = int(max_level)
+            self.bot.strategy = self.strategy_var.get()
+            self.bot.pattern_index = 0
+            self.bot.martingale_level = 1
+            self.bot.first_run = True
+            self.bot.starting_balance = None # Reset for new session
+            self.bot.target_balance = None
+            self.bot.start_time = time.time() # RESET CLOCK ON GUI START
         
         self.is_running = True
         self.start_btn.config(state=tk.DISABLED)
@@ -286,6 +309,17 @@ class BaccaratGUI:
         self.start_btn.config(state=tk.NORMAL)
         self.stop_btn.config(state=tk.DISABLED)
         logger.log("Bot stopped.", "INFO")
+
+    def test_bot_clicks(self):
+        if self.is_running:
+            messagebox.showwarning("Busy", "Cannot test clicks while bot is running.")
+            return
+            
+        if not self.bot:
+            self.initialize_bot_instance()
+            
+        if self.bot:
+            threading.Thread(target=self.bot.execute_test_bet, daemon=True).start()
 
 if __name__ == "__main__":
     root = tk.Tk()

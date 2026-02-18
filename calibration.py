@@ -85,7 +85,7 @@ def main(wait_func=input):
     # 3. Chip Calibration
     logger.log("--- Calibrating Chips ---", "INFO")
     chips = {}
-    chip_values = [10, 50, 100, 250, 1250, 5000, 12500, 50000]
+    chip_values = [10, 50, 100, 250, 500, 1000, 5000, 10000]
     
     for val in chip_values:
         config['chips'] = chips # Update mid-loop for partial saves if needed
