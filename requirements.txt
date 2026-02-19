@@ -3,3 +3,5 @@ pytesseract
 pillow
 numpy
 colorama
+requests
+customtkinter

@@ -13,8 +13,32 @@ class BaccaratGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Baccarat Automation Bot v2.0")
-        self.root.geometry("600x700")
+        self.root.geometry("620x800")
         self.root.configure(bg="#2c3e50")
+        
+        # Create a Canvas and Scrollbar for scrollability
+        self.canvas = tk.Canvas(self.root, bg="#2c3e50", highlightthickness=0)
+        self.scrollbar = ttk.Scrollbar(self.root, orient="vertical", command=self.canvas.yview)
+        self.scrollable_frame = tk.Frame(self.canvas, bg="#2c3e50")
+
+        self.scrollable_frame.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(
+                scrollregion=self.canvas.bbox("all")
+            )
+        )
+
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw", width=600)
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+        self.canvas.pack(side="left", fill="both", expand=True)
+        self.scrollbar.pack(side="right", fill="y")
+        
+        # Bind MouseWheel to Canvas
+        self.root.bind_all("<MouseWheel>", self._on_mousewheel)
+        
+        # Add trace for strategy change
+        # (Included in setup_ui but re-referenced here for clarity)
         
         self.style = ttk.Style()
         self.style.theme_use('clam')
@@ -29,6 +53,9 @@ class BaccaratGUI:
         self.setup_ui()
         self.bind_keys()
 
+    def _on_mousewheel(self, event):
+        self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+
     def bind_keys(self):
         self.root.bind("<space>", self.on_space_pressed)
 
@@ -37,9 +64,9 @@ class BaccaratGUI:
             self.trigger_next_step()
 
     def setup_ui(self):
-        # Main Container
-        self.main_frame = tk.Frame(self.root, bg="#2c3e50")
-        self.main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+        # Main Container - Now parented to scrollable_frame
+        self.main_frame = tk.Frame(self.scrollable_frame, bg="#2c3e50")
+        self.main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=20)
         
         # Title
         title_label = tk.Label(self.main_frame, text="BACCARAT BOT", font=("Helvetica", 24, "bold"), fg="#ecf0f1", bg="#2c3e50")
@@ -88,8 +115,9 @@ class BaccaratGUI:
         # Strategy (Tank, Sweeper, etc.)
         tk.Label(self.config_frame, text="Strategy:", fg="#ecf0f1", bg="#2c3e50").grid(row=3, column=0, sticky=tk.W, padx=10, pady=5)
         self.strategy_var = tk.StringVar(value="Standard")
-        self.strategy_combo = ttk.Combobox(self.config_frame, textvariable=self.strategy_var, values=["Standard", "Tank", "Sweeper"], state="readonly")
+        self.strategy_combo = ttk.Combobox(self.config_frame, textvariable=self.strategy_var, values=["Standard", "Tank", "Sweeper", "Burst"], state="readonly")
         self.strategy_combo.grid(row=3, column=1, sticky=tk.W, padx=10, pady=5)
+        self.strategy_var.trace_add("write", self.on_strategy_change)
 
         # Target Profit %
         tk.Label(self.config_frame, text="Target Profit %:", fg="#ecf0f1", bg="#2c3e50").grid(row=4, column=0, sticky=tk.W, padx=10, pady=5)
@@ -105,6 +133,26 @@ class BaccaratGUI:
 
         # Initial Toggle
         self.toggle_mode_fields()
+
+        # --- Remote Settings (Website) ---
+        self.remote_frame = tk.LabelFrame(self.main_frame, text="Remote Settings (Website)", fg="#f1c40f", bg="#2c3e50", font=("Helvetica", 10, "bold"))
+        self.remote_frame.pack(fill=tk.X, pady=10, padx=5)
+        
+        # Grid for remote settings
+        self.remote_labels = {}
+        fields = [
+            ("Base Bet:", "bet"),
+            ("Pattern:", "pattern"),
+            ("Strategy:", "strategy"),
+            ("Target %:", "target_profit"),
+            ("Status:", "command")
+        ]
+        
+        for i, (label_text, key) in enumerate(fields):
+            tk.Label(self.remote_frame, text=label_text, fg="#ecf0f1", bg="#2c3e50").grid(row=i//2, column=(i%2)*2, sticky=tk.W, padx=10, pady=2)
+            val_lbl = tk.Label(self.remote_frame, text="---", fg="#f1c40f", bg="#2c3e50", font=("Helvetica", 10, "bold"))
+            val_lbl.grid(row=i//2, column=(i%2)*2+1, sticky=tk.W, padx=5, pady=2)
+            self.remote_labels[key] = val_lbl
 
         # --- Logs ---
         log_frame = tk.LabelFrame(self.main_frame, text="Bot Logs", fg="#ecf0f1", bg="#2c3e50", font=("Helvetica", 10, "bold"))
@@ -204,14 +252,36 @@ class BaccaratGUI:
     def disable_bot_controls(self):
         self.start_btn.config(state=tk.DISABLED)
 
+    def on_strategy_change(self, *args):
+        """Automatically set defaults when Burst strategy is selected."""
+        if self.strategy_var.get() == "Burst":
+            self.base_bet_var.set("90")
+            self.max_level_var.set("3")
+            logger.log("Burst Strategy selected: Auto-set Base Bet to 90 and Max Level to 3.", "INFO")
+
     def initialize_bot_instance(self):
         """Creates the initial bot instance for monitoring/registration."""
         try:
-            self.bot = Bot()
+            self.bot = Bot(on_settings_sync=self.update_remote_settings_display)
             logger.log(f"Bot Registered as: {self.bot.pc_name}", "SUCCESS")
         except Exception as e:
             logger.log(f"Startup Monitoring Error: {e}", "DEBUG")
             self.bot = None
+
+    def update_remote_settings_display(self, remote_data):
+        """Callback to update GUI with remote settings."""
+        if not hasattr(self, 'remote_labels'): return
+        
+        def update():
+            for key, label in self.remote_labels.items():
+                val = remote_data.get(key)
+                if key == 'command':
+                    status = "RUNNING" if str(val).lower() in ['true', 'start', 'run', '1'] else "STOPPED"
+                    label.config(text=status)
+                elif val is not None:
+                    label.config(text=str(val))
+                    
+        self.root.after(0, update)
 
     def start_bot_thread(self):
         base_bet = self.base_bet_var.get()
@@ -289,7 +359,7 @@ class BaccaratGUI:
                     # IDLE MODE: Bot is stopped remotely, but the thread is still listening
                     # We check Supabase every 5 seconds to see if 'RUN' is sent back
                     if time.time() - self.bot.last_sync_time > 5:
-                        self.bot.push_monitoring_update(status="Idle (Remotely Stopped)")
+                        self.bot.push_monitoring_update(status="Idle")
                     time.sleep(1)
 
         except Exception as e:

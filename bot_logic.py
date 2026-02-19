@@ -6,6 +6,7 @@ import os
 import numpy as np
 from PIL import Image, ImageOps
 import requests
+import math
 from utils import logger
 
 # Configuration for Tesseract
@@ -16,9 +17,10 @@ pyautogui.PAUSE = 0.02 # Minimal delay between actions
 pyautogui.FAILSAFE = True
 
 class Bot:
-    def __init__(self, config_file='config.json', pattern_string='B', base_bet=10, reset_on_cycle=True, target_percentage=None, max_level=10, strategy="Standard"):
+    def __init__(self, config_file='config.json', pattern_string='B', base_bet=10, reset_on_cycle=True, target_percentage=None, max_level=10, strategy="Standard", on_settings_sync=None):
         self.config_file = config_file
         self.config = self.load_config()
+        self.on_settings_sync = on_settings_sync
         self.running = False
         self.base_bet = base_bet
         self.current_bet = self.base_bet
@@ -36,8 +38,11 @@ class Bot:
         self.strategies = {
             "Standard": [2] * 20,
             "Tank":    [2, 2, 2, 2, 2, 3, 2, 3, 2],
-            "Sweeper": [3, 3, 3, 3, 2, 2, 2, 2, 2]
+            "Sweeper": [3, 3, 3, 3, 2, 2, 2, 2, 2],
+            "Burst":   [1.6667, 1.8, 1.926]
         }
+        self.strategy = strategy
+        self.banker_density = self.calculate_banker_density(pattern_string)
         self.target_duration = 0 # Target seconds from DB
         
         self.pattern = pattern_string.upper().replace("-", "").replace(" ", "")
@@ -47,7 +52,8 @@ class Bot:
             
         self.pattern_index = 0
         self.reset_on_cycle = reset_on_cycle
-        self.last_end_balance = None  # Tracks end balance for play history continuity
+        self.last_end_balance = None  # Tracks balance for continuity
+        self.current_bet_start_balance = None # Balance captured right before placing a bet
         
         logger.log(f"Bot Initialized. Pattern: {self.pattern} | Strategy: {self.strategy}", "INFO")
 
@@ -93,16 +99,13 @@ class Bot:
         elapsed_seconds = int(time.time() - self.start_time)
         
         # Mapping to your Supabase 'bot_monitoring' schema
+        # We only push status information to avoid overwriting settings set via the website
         payload = {
             "pc_name": self.pc_name,
             "status": effective_status,
             "balance": balance if balance is not None else 0,
             "level": self.martingale_level,
-            "bet": int(self.base_bet), # Push Base Bet so it stays in sync with website settings
-            "pattern": self.pattern,
-            "strategy": self.strategy,
-            "target_profit": self.target_percentage if self.target_percentage else 0,
-            "duration": int((time.time() - self.start_time) / 60) # Changed seconds to minutes
+            "duration": int((time.time() - self.start_time) / 60) 
         }
 
         try:
@@ -120,6 +123,11 @@ class Bot:
                 logger.log(f"Supabase Sync Failed: {response.status_code}", "DEBUG")
         except Exception as e:
             logger.log(f"Monitoring error: {e}", "DEBUG")
+
+    def calculate_banker_density(self, pattern):
+        if not pattern: return 0
+        pattern = pattern.upper()
+        return pattern.count('B') / len(pattern)
 
     def push_play_history(self, start_bal, end_bal, level, bet_size):
         """Logs the outcome to 'play_history' table."""
@@ -152,6 +160,7 @@ class Bot:
         if new_pattern and new_pattern.upper() != self.pattern:
             self.pattern = new_pattern.upper().replace("-", "").replace(" ", "")
             self.pattern_index = 0
+            self.banker_density = self.calculate_banker_density(self.pattern)
 
         # 2. Bet (Base Bet) Sync
         new_bet = remote_data.get('bet')
@@ -202,6 +211,10 @@ class Bot:
             self.start_time = time.time() # Reset clock on session start
             self.running = True
             logger.log("Starting bot (Remote Command)...", "INFO")
+
+        # Notify UI if callback exists
+        if self.on_settings_sync:
+            self.on_settings_sync(remote_data)
 
     def capture_status_region(self, region_key):
         region_config = self.config.get(region_key)
@@ -276,6 +289,13 @@ class Bot:
                 lookup -= 1
             target_char = resolved_side if resolved_side else 'B'
 
+        # Capture balance before betting for accurate history
+        current_bal = self.get_current_balance()
+        if current_bal is not None:
+            self.current_bet_start_balance = current_bal
+        elif self.last_end_balance is not None:
+            self.current_bet_start_balance = self.last_end_balance
+            
         # Added small pre-bet delay to ensure window is open
         time.sleep(1.0)
         target_key = 'target_a' if target_char == 'B' else 'target_b'
@@ -369,12 +389,18 @@ class Bot:
             elif actual_result == "PUSH":
                 self.pattern_index = (self.pattern_index + 1) % len(self.pattern)
             elif actual_result == "LOSS":
-                multipliers = self.strategies.get(self.strategy, self.strategies["Standard"])
-                if self.martingale_level <= len(multipliers):
-                    multiplier = multipliers[self.martingale_level - 1]
-                    self.current_bet *= multiplier
+                # Smart Banker Multiplier Override
+                current_target_char = self.pattern[self.pattern_index]
+                if current_target_char == 'B' and self.banker_density > 0.25:
+                    self.current_bet = math.ceil(self.current_bet * 2.11 / 10) * 10
+                    logger.log(f"Banker Multiplier (2.11x) applied (Density: {self.banker_density:.2f}). Rounding up to nearest 10.", "INFO")
                 else:
-                    self.current_bet *= 2
+                    multipliers = self.strategies.get(self.strategy, self.strategies["Standard"])
+                    if self.martingale_level <= len(multipliers):
+                        multiplier = multipliers[self.martingale_level - 1]
+                        self.current_bet = int(self.current_bet * multiplier)
+                    else:
+                        self.current_bet *= 2
 
                 self.martingale_level += 1
                 self.pattern_index = (self.pattern_index + 1) % len(self.pattern)
@@ -387,11 +413,16 @@ class Bot:
             
             # Capture end balance AFTER result clears (payout has settled)
             end_bal = self.get_current_balance()
+            
+            # Use the balance from BEFORE the bet for the start of history
+            history_start = self.current_bet_start_balance if self.current_bet_start_balance is not None else self.last_end_balance
+            
             if actual_result != "PUSH":
-                # Use last round's end balance as this round's start balance for accuracy
-                history_start = self.last_end_balance if self.last_end_balance is not None else start_bal
                 self.push_play_history(history_start, end_bal, prev_level, prev_bet)
+                
             self.last_end_balance = end_bal
+            # Important: Reset round start balance after logging
+            self.current_bet_start_balance = None 
 
             self.execute_bet(self.pattern[self.pattern_index])
             time.sleep(2)
@@ -403,6 +434,10 @@ class Bot:
     def start(self):
         self.running = True
         self.start_time = time.time()
+        
+        # Initial balance capture
+        self.last_end_balance = self.get_current_balance()
+        
         logger.log("Bot session active. Listening for commands...", "INFO")
         try:
             while True:
