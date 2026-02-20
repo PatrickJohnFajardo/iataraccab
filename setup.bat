@@ -1,5 +1,6 @@
 @echo off
 TITLE Baccarat Bot Setup
+COLOR 0B
 CLS
 
 ECHO ======================================================
@@ -11,29 +12,45 @@ ECHO.
 python --version >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
     ECHO [ERROR] Python is not installed or not in your PATH.
-    ECHO Please install Python 3.10+ and try again.
+    ECHO.
+    ECHO Please install Python 3.10+ from python.org
+    ECHO IMPORTANT: Check "Add Python to PATH" during install.
+    ECHO.
     PAUSE
     EXIT /B
 )
 
-:: 2. Create Virtual Environment if it doesn't exist
+:: 2. Create Virtual Environment
 IF NOT EXIST ".venv" (
     ECHO [INFO] Creating virtual environment (.venv)...
     python -m venv .venv
+    IF %ERRORLEVEL% NEQ 0 (
+        ECHO [ERROR] Failed to create virtual environment. 
+        PAUSE
+        EXIT /B
+    )
 ) ELSE (
     ECHO [INFO] Virtual environment already exists.
 )
 
-:: 3. Upgrade pip and install requirements
+:: 3. Install Requirements
 ECHO [INFO] Installing/Upgrading dependencies...
-call .venv\Scripts\activate.bat
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
-:: 4. Done
+:: 4. Verify Tesseract
+IF NOT EXIST "C:\Program Files\Tesseract-OCR\tesseract.exe" (
+    ECHO.
+    ECHO [WARNING] Tesseract OCR not found at default location!
+    ECHO Please install Tesseract-OCR to:
+    ECHO C:\Program Files\Tesseract-OCR\
+    ECHO.
+)
+
+:: 5. Done
 ECHO.
 ECHO ======================================================
 ECHO      Setup Complete! 
-ECHO      You can now run 'run_gui.bat' (to be created)
+ECHO      You can now run 'run_gui.bat'
 ECHO ======================================================
 PAUSE

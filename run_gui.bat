@@ -1,5 +1,6 @@
 @echo off
 TITLE Baccarat Bot V2
+COLOR 0A
 CLS
 
 :: Check for virtual environment
@@ -10,8 +11,10 @@ IF NOT EXIST ".venv" (
     EXIT /B
 )
 
-:: Activate and Run
+:: Run using the venv python
 ECHO Starting Baccarat Bot V2...
-call .venv\Scripts\activate.bat
-python gui.py
-PAUSE
+.\.venv\Scripts\python.exe main.py
+IF %ERRORLEVEL% NEQ 0 (
+    ECHO Bot crashed or was stopped.
+    PAUSE
+)

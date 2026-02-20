@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+build/
+dist/
+*.pyc
+*.spec
+automation_log.txt
+debug_scan_region.png
+status.txt

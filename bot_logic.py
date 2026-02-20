@@ -7,7 +7,7 @@ import numpy as np
 from PIL import Image, ImageOps
 import requests
 import math
-from utils import logger
+from utils import logger, get_hwid
 
 # Configuration for Tesseract
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -59,16 +59,10 @@ class Bot:
 
         # Monitoring Settings
         self.sb_config = self.config.get('supabase', {})
-        self.pc_name = self.sb_config.get('pc_name', 'Unknown-PC')
+        self.martingale_level = 0
         
-        # If still default, add a small random suffix to avoid collisions in DB
-        if self.pc_name == "Unknown-PC" or self.pc_name == "PC-NEW":
-            import random
-            self.pc_name = f"{self.pc_name}-{random.randint(100, 999)}"
-            
-        self.sb_url = self.sb_config.get('url')
-        self.sb_key = self.sb_config.get('key')
-        self.martingale_level = 1
+        # Handle Automatic PC Naming
+        self.handle_pc_naming()
         
         if self.sb_url and self.sb_key:
             self.push_monitoring_update(status="Starting")
@@ -79,6 +73,79 @@ class Bot:
             raise FileNotFoundError("Config file not found.")
         with open(self.config_file, 'r') as f:
             return json.load(f)
+
+    def save_config(self):
+        try:
+            with open(self.config_file, 'w') as f:
+                json.dump(self.config, f, indent=2)
+            logger.log("Configuration saved.", "DEBUG")
+        except Exception as e:
+            logger.log(f"Failed to save config: {e}", "ERROR")
+
+    def handle_pc_naming(self):
+        """Automatically detects new computers and assigns a sequential name (PC-1, PC-2, etc.)"""
+        self.sb_config = self.config.get('supabase', {})
+        self.pc_name = self.sb_config.get('pc_name', 'Unknown-PC')
+        self.sb_url = self.sb_config.get('url')
+        self.sb_key = self.sb_config.get('key')
+        
+        current_hwid = get_hwid()
+        stored_hwid = self.sb_config.get('hardware_id')
+        
+        # If hardware matches and we already have a assigned name, we are good
+        if stored_hwid == current_hwid and self.pc_name not in ["Unknown-PC", "PC-NEW"]:
+            logger.log(f"Hardware recognized: {self.pc_name}", "INFO")
+            return
+
+        # If we reach here, it's either a new computer, or the first time this logic runs
+        logger.log("New computer or uninitialized PC detected. Checking available names...", "INFO")
+        
+        if not self.sb_url or not self.sb_key:
+            logger.log("Supabase credentials missing, skipping auto-naming.", "DEBUG")
+            return
+
+        # Get existing PC names from Supabase to find the next available index
+        try:
+            url = f"{self.sb_url}/rest/v1/bot_monitoring?select=pc_name"
+            headers = {
+                "apikey": self.sb_key,
+                "Authorization": f"Bearer {self.sb_key}"
+            }
+            response = requests.get(url, headers=headers, timeout=5)
+            if response.status_code == 200:
+                existing_names = [item['pc_name'] for item in response.json()]
+                
+                # Find the next available index for "PC-X" pattern
+                max_idx = 0
+                import re
+                for name in existing_names:
+                    match = re.match(r'PC-(\d+)', name)
+                    if match:
+                        idx = int(match.group(1))
+                        if idx > max_idx:
+                            max_idx = idx
+                
+                new_idx = max_idx + 1
+                self.pc_name = f"PC-{new_idx}"
+                logger.log(f"Detected new computer. Assigned name: {self.pc_name}", "SUCCESS")
+                
+                # Update config and save
+                if 'supabase' not in self.config:
+                    self.config['supabase'] = {}
+                self.config['supabase']['pc_name'] = self.pc_name
+                self.config['supabase']['hardware_id'] = current_hwid
+                self.save_config()
+            else:
+                # Fallback if query fails
+                if self.pc_name in ["Unknown-PC", "PC-NEW"]:
+                    import random
+                    self.pc_name = f"PC-{random.randint(100, 999)}"
+                    logger.log(f"Could not reach Supabase. Assigned temporary name: {self.pc_name}", "WARNING")
+        except Exception as e:
+            logger.log(f"Auto-naming error: {e}", "DEBUG")
+            if self.pc_name in ["Unknown-PC", "PC-NEW"]:
+                import random
+                self.pc_name = f"PC-{random.randint(100, 999)}"
 
     def push_monitoring_update(self, status=None):
         if not self.sb_url or not self.sb_key or "YOUR_SUPABASE_KEY" in self.sb_key:
@@ -91,11 +158,15 @@ class Bot:
             "Prefer": "resolution=merge-duplicates,return=representation"
         }
         
-        effective_status = status if status else ("Running" if self.running else "Stopped")
-        if self.running:
-            effective_status += f" (Bet: {int(self.current_bet)})"
-            
         balance = self.get_current_balance()
+        
+        if balance is not None and balance < 10:
+            effective_status = "Burned"
+        elif status:
+            effective_status = status
+        else:
+            effective_status = "Running" if self.running else "Stopped"
+        
         elapsed_seconds = int(time.time() - self.start_time)
         
         # Mapping to your Supabase 'bot_monitoring' schema
@@ -103,9 +174,7 @@ class Bot:
         payload = {
             "pc_name": self.pc_name,
             "status": effective_status,
-            "balance": balance if balance is not None else 0,
-            "level": self.martingale_level,
-            "duration": int((time.time() - self.start_time) / 60) 
+            "balance": balance if balance is not None else 0
         }
 
         try:
@@ -154,6 +223,29 @@ class Bot:
         except Exception as e:
             logger.log(f"History log error: {e}", "DEBUG")
 
+    def apply_constraints(self):
+        """Enforces safety rules defined by the system/UI."""
+        # 1. Bet Size vs Max Level Mapping
+        # 10 -> 14, 50 -> 12, 100 -> 11, 200 -> 10
+        bet_limits = {200: 10, 100: 11, 50: 12, 10: 14}
+        
+        # Determine strict limit based on base_bet
+        strict_limit = 14 # Default safe maximum
+        for trigger_bet, limit in sorted(bet_limits.items(), reverse=True):
+            if self.base_bet >= trigger_bet:
+                strict_limit = limit
+                break
+        
+        if self.max_level > strict_limit:
+            logger.log(f"Max Level {self.max_level} exceeds safety limit for Bet {self.base_bet}. Clamping to {strict_limit}.", "WARNING")
+            self.max_level = strict_limit
+
+        # 2. Level vs Strategy Constraints
+        # Sweeper/Burst only work on low levels (< 4)
+        if self.max_level >= 4 and self.strategy in ["Sweeper", "Burst"]:
+            logger.log(f"Strategy {self.strategy} is not allowed for Level {self.max_level}. Reverting to Standard.", "WARNING")
+            self.strategy = "Standard"
+
     def sync_remote_settings(self, remote_data):
         # 1. Pattern Sync
         new_pattern = remote_data.get('pattern')
@@ -179,7 +271,18 @@ class Bot:
         if new_strategy and new_strategy in self.strategies and new_strategy != self.strategy:
             self.strategy = new_strategy
 
-        # 4. Target Profit Sync
+        # 4. Max Level Sync (Read from 'level' column)
+        new_max_level = remote_data.get('level')
+        if new_max_level is not None:
+            try:
+                new_max_level = int(new_max_level)
+                if new_max_level != self.max_level:
+                    self.max_level = new_max_level
+                    logger.log(f"Synced Max Level: {self.max_level}", "INFO")
+            except ValueError:
+                pass
+
+        # 5. Target Profit Sync
         new_profit_pct = remote_data.get('target_profit')
         if new_profit_pct is not None and float(new_profit_pct) != self.target_percentage:
             self.target_percentage = float(new_profit_pct)
@@ -212,6 +315,9 @@ class Bot:
             self.running = True
             logger.log("Starting bot (Remote Command)...", "INFO")
 
+        # 7. Final validation of synced cross-settings
+        self.apply_constraints()
+
         # Notify UI if callback exists
         if self.on_settings_sync:
             self.on_settings_sync(remote_data)
@@ -228,9 +334,13 @@ class Bot:
             np_img = np.array(img)
             avg_color = np_img.mean(axis=(0, 1))
             r, g, b = avg_color
-            if (g > r + 10) and (g > b + 10) and (g > 80):
-                text = pytesseract.image_to_string(img.convert('L').point(lambda p: p > 150 and 255)).strip().lower()
-                if "tie" in text: return True
+            
+            # Robust Check: distinctly green OR OCR match
+            is_green = (g > r + 15) and (g > b + 15) and (g > 70)
+            
+            text = pytesseract.image_to_string(img.convert('L').point(lambda p: p > 150 and 255)).strip().lower()
+            if "tie" in text or "t1e" in text or is_green: 
+                return True
         except: pass
         return False
 
@@ -333,7 +443,7 @@ class Bot:
 
         # 1. CHECK DURATION LIMIT (Whichever comes first skip/stop)
         if self.target_duration > 0 and elapsed_seconds >= self.target_duration:
-            logger.log(f"SESSION STOP: Time limit of {self.target_duration}s reached.", "WARNING")
+            logger.log(f"SESSION STOP: Time limit of {int(self.target_duration / 60)}m reached.", "WARNING")
             self.running = False
             return
 
@@ -373,21 +483,30 @@ class Bot:
             if outcome == "TIE": actual_result = "PUSH"
             elif outcome == current_target_name or outcome == "GENERIC_WIN": actual_result = "WIN"
                 
-            logger.log(f"Result: {actual_result}", "INFO")
+            logger.log(f"Result determined: {actual_result}", "INFO")
 
             prev_bet = self.current_bet
             prev_level = self.martingale_level
 
+            # --- SESSION START HANDLING ---
             if self.last_result is None:
+                logger.log("First hand detected (Baseline). Ignoring result for stats/betting.", "WARNING")
                 self.current_bet = self.base_bet
-                self.martingale_level = 1
+                self.martingale_level = 0
                 self.pattern_index = 0
-            elif actual_result == "WIN":
+                self.last_result = "SIGHTED" # Custom state to mark baseline is done
+                self.last_end_balance = self.get_current_balance()
+                self.execute_bet(self.pattern[self.pattern_index])
+                return
+
+            # --- STANDARD LOGIC ---
+            if actual_result == "WIN":
                 self.current_bet = self.base_bet
-                self.martingale_level = 1
+                self.martingale_level = 0
                 self.pattern_index = (self.pattern_index + 1) % len(self.pattern)
             elif actual_result == "PUSH":
-                self.pattern_index = (self.pattern_index + 1) % len(self.pattern)
+                logger.log("Tie detected: Keeping same pattern index for next bet.", "INFO")
+                # pattern_index is NOT incremented, so the next bet is on the same side.
             elif actual_result == "LOSS":
                 # Smart Banker Multiplier Override
                 current_target_char = self.pattern[self.pattern_index]
@@ -396,8 +515,8 @@ class Bot:
                     logger.log(f"Banker Multiplier (2.11x) applied (Density: {self.banker_density:.2f}). Rounding up to nearest 10.", "INFO")
                 else:
                     multipliers = self.strategies.get(self.strategy, self.strategies["Standard"])
-                    if self.martingale_level <= len(multipliers):
-                        multiplier = multipliers[self.martingale_level - 1]
+                    if self.martingale_level < len(multipliers):
+                        multiplier = multipliers[self.martingale_level]
                         self.current_bet = int(self.current_bet * multiplier)
                     else:
                         self.current_bet *= 2

@@ -331,7 +331,8 @@ class BaccaratGUI:
             self.bot.max_level = int(max_level)
             self.bot.strategy = self.strategy_var.get()
             self.bot.pattern_index = 0
-            self.bot.martingale_level = 1
+            self.bot.martingale_level = 0
+            self.bot.last_result = None # Force first hand to be baseline
             self.bot.first_run = True
             self.bot.starting_balance = None # Reset for new session
             self.bot.target_balance = None
