@@ -39,7 +39,7 @@ class Bot:
         self.strategies = {
             "Standard": [2] * 20,
             "Tank":    [2, 2, 2, 2, 2, 3, 2, 3, 2],
-            "Sweeper": [3, 3, 3, 3, 2, 2, 2, 2, 2],
+            "Sweeper": [3, 3, 3, 2, 2, 2, 2, 2, 2, 2],
             "Burst":   [1.6667, 1.8, 1.926]
         }
         self.strategy = strategy
