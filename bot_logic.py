@@ -3,6 +3,7 @@ import pytesseract
 import json
 import time
 import os
+import random
 import numpy as np
 from PIL import Image, ImageOps
 import requests
@@ -364,7 +365,9 @@ class Bot:
         return None
 
     def wait_for_result_to_clear(self):
-        time.sleep(3) # Increased from 1s to 3s to fix premature betting
+        # Human-like delay: Random 3-5 seconds to let the result settle
+        delay = random.uniform(3.0, 5.0)
+        time.sleep(delay)
         return True
 
     def drift_detection(self):
@@ -406,18 +409,35 @@ class Bot:
         elif self.last_end_balance is not None:
             self.current_bet_start_balance = self.last_end_balance
             
-        # Added small pre-bet delay to ensure window is open
-        time.sleep(1.0)
+        # Humanized pre-bet delay: Ensure window is open and looks natural
+        time.sleep(random.uniform(0.8, 1.5))
+        
         target_key = 'target_a' if target_char == 'B' else 'target_b'
         target = self.config[target_key]
         chips_to_click = self.select_chips(self.current_bet)
+        
         for chip_val, count in chips_to_click.items():
             chip_config = self.config['chips'].get(str(chip_val))
             if chip_config:
-                pyautogui.click(chip_config['x'], chip_config['y'], duration=0.05)
-                time.sleep(0.05)
-                pyautogui.click(x=target['x'], y=target['y'], clicks=count, interval=0.05, duration=0.05)
-                time.sleep(0.05)
+                # Randomize chip click coordinates (±3 pixels)
+                chip_x = chip_config['x'] + random.randint(-3, 3)
+                chip_y = chip_config['y'] + random.randint(-3, 3)
+                # Randomize movement speed (0.1s to 0.3s)
+                move_dur = random.uniform(0.1, 0.3)
+                
+                pyautogui.click(chip_x, chip_y, duration=move_dur)
+                time.sleep(random.uniform(0.05, 0.15))
+                
+                # Randomize target click coordinates (±5 pixels)
+                target_x = target['x'] + random.randint(-5, 5)
+                target_y = target['y'] + random.randint(-5, 5)
+                
+                # For multiple clicks, add slight intervals
+                for _ in range(count):
+                    pyautogui.click(x=target_x, y=target_y, duration=random.uniform(0.05, 0.1))
+                    time.sleep(random.uniform(0.02, 0.08))
+                
+                time.sleep(random.uniform(0.05, 0.15))
 
         self.push_monitoring_update()
 
@@ -429,11 +449,21 @@ class Bot:
             logger.log("Cannot test clicks: Chip 10 not calibrated.", "ERROR")
             return
             
-        logger.log("Testing clicks: Chip 10 -> Banker", "INFO")
-        pyautogui.click(chip_10['x'], chip_10['y'], duration=0.1)
-        time.sleep(0.1)
-        pyautogui.click(target['x'], target['y'], duration=0.1)
-        logger.log("Click test complete.", "SUCCESS")
+        logger.log("Testing humanized clicks: Chip 10 -> Banker", "INFO")
+        
+        # Randomize chip click
+        cx = chip_10['x'] + random.randint(-3, 3)
+        cy = chip_10['y'] + random.randint(-3, 3)
+        pyautogui.click(cx, cy, duration=random.uniform(0.15, 0.35))
+        
+        time.sleep(random.uniform(0.1, 0.3))
+        
+        # Randomize target click
+        tx = target['x'] + random.randint(-5, 5)
+        ty = target['y'] + random.randint(-5, 5)
+        pyautogui.click(tx, ty, duration=random.uniform(0.15, 0.35))
+        
+        logger.log(f"Click test complete. Offset applied: ({tx-target['x']}, {ty-target['y']})", "SUCCESS")
 
     def run_cycle(self):
         self.push_monitoring_update()
@@ -508,11 +538,14 @@ class Bot:
                 logger.log("Tie detected: Keeping same pattern index for next bet.", "INFO")
                 # pattern_index is NOT incremented, so the next bet is on the same side.
             elif actual_result == "LOSS":
-                # Smart Banker Multiplier Override
+                # Smart Banker Multiplier Override (2.11x)
+                # Only apply if currently betting on Banker AND the pattern contains consecutive Bankers (e.g. "BB")
                 current_target_char = self.pattern[self.pattern_index]
-                if current_target_char == 'B' and self.banker_density > 0.25:
+                has_consecutive_bankers = "BB" in self.pattern
+                
+                if current_target_char == 'B' and has_consecutive_bankers:
                     self.current_bet = math.ceil(self.current_bet * 2.11 / 10) * 10
-                    logger.log(f"Banker Multiplier (2.11x) applied (Density: {self.banker_density:.2f}). Rounding up to nearest 10.", "INFO")
+                    logger.log(f"Banker Multiplier (2.11x) applied (Pattern contains 'BB'). Rounding up to nearest 10.", "INFO")
                 else:
                     multipliers = self.strategies.get(self.strategy, self.strategies["Standard"])
                     if self.martingale_level < len(multipliers):
@@ -544,7 +577,8 @@ class Bot:
             self.current_bet_start_balance = None 
 
             self.execute_bet(self.pattern[self.pattern_index])
-            time.sleep(2)
+            # Post-bet idle delay
+            time.sleep(random.uniform(1.5, 3.0))
         else:
             if time.time() - self.last_sync_time > 5:
                 self.push_monitoring_update()

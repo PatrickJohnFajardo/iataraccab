@@ -4,6 +4,6 @@ build/
 dist/
 *.pyc
 *.spec
+*.png
 automation_log.txt
-debug_scan_region.png
 status.txt
