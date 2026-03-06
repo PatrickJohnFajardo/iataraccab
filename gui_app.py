@@ -263,7 +263,7 @@ class BaccaratGUI:
         """Creates the initial bot instance for monitoring/registration."""
         try:
             self.bot = Bot(on_settings_sync=self.update_remote_settings_display)
-            logger.log(f"Bot Registered as: {self.bot.pc_name}", "SUCCESS")
+            logger.log(f"Bot Registered as ID: {self.bot.bot_id}", "SUCCESS")
         except Exception as e:
             logger.log(f"Startup Monitoring Error: {e}", "DEBUG")
             self.bot = None

@@ -1,75 +1,75 @@
 {
   "target_a": {
-    "x": 1163,
-    "y": 1000,
-    "color": [152, 5, 20]
+    "x": 1141,
+    "y": 957,
+    "color": [176, 6, 24]
   },
   "target_b": {
-    "x": 756,
-    "y": 999,
-    "color": [16, 59, 137]
+    "x": 767,
+    "y": 965,
+    "color": [7, 54, 144]
   },
   "target_c": {
-    "x": 967,
-    "y": 999,
-    "color": [19, 119, 37]
+    "x": 953,
+    "y": 964,
+    "color": [6, 118, 31]
   },
   "status_region_main": {
-    "x": 858,
-    "y": 417,
-    "width": 191,
-    "height": 50
+    "x": 842,
+    "y": 412,
+    "width": 221,
+    "height": 56
   },
   "status_region_tie": {
-    "x": 799,
-    "y": 357,
-    "width": 305,
-    "height": 58
+    "x": 839,
+    "y": 360,
+    "width": 225,
+    "height": 55
   },
   "status_region_balance": {
-    "x": 63,
-    "y": 1145,
-    "width": 111,
-    "height": 45
+    "x": 65,
+    "y": 1146,
+    "width": 109,
+    "height": 43
   },
   "chips": {
     "10": {
-      "x": 753,
-      "y": 1167
+      "x": 750,
+      "y": 1155
     },
     "50": {
-      "x": 808,
-      "y": 1169
+      "x": 816,
+      "y": 1158
     },
     "100": {
-      "x": 874,
-      "y": 1164
+      "x": 873,
+      "y": 1158
     },
     "250": {
-      "x": 933,
-      "y": 1165
+      "x": 923,
+      "y": 1158
     },
     "500": {
       "x": 984,
-      "y": 1167
+      "y": 1159
     },
     "1000": {
-      "x": 1048,
-      "y": 1167
+      "x": 1049,
+      "y": 1159
     },
     "5000": {
-      "x": 1108,
-      "y": 1170
+      "x": 1114,
+      "y": 1165
     },
     "10000": {
-      "x": 1166,
+      "x": 1165,
       "y": 1165
     }
   },
   "supabase": {
     "url": "https://pfoxlnlqjeibqxmgsohn.supabase.co",
     "key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmb3hsbmxxamVpYnF4bWdzb2huIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDM2OTIyNiwiZXhwIjoyMDg1OTQ1MjI2fQ.zNgr0_KuGNPtXDc5VMyvnASFuy3w-aafnJHBVDM-kKU",
-    "bot_id": "",
-    "hardware_id": "0E59A1A8-1F44-0000-0000-000000000000"
+    "bot_id": "958F87D1",
+    "hardware_id": "4aa220fa-3061-4f7f-89cc-8ad4fd34e41a"
   }
 }
