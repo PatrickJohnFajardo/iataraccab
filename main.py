@@ -1,19 +1,30 @@
 import tkinter as tk
 import sys
 import json
+import atexit
 from gui_app import BaccaratGUI
 from bot_logic import Bot
 from utils import logger
+from startup import initialize_environment, stop_ngrok
 
 def main():
+    # ── Run Startup & Registration ──
+    logger.log("Running startup registration...", "INFO")
+    ngrok_url = initialize_environment()
+    if ngrok_url:
+        logger.log(f"ngrok tunnel active: {ngrok_url}", "SUCCESS")
+    else:
+        logger.log("No ngrok tunnel (bot registered without it).", "INFO")
+
+    # Ensure ngrok is cleaned up on exit
+    atexit.register(stop_ngrok)
+
     if "--headless" in sys.argv:
         logger.log("Starting in HEADLESS mode...", "INFO")
         try:
             with open('config.json', 'r') as f:
                 config = json.load(f)
             
-            # Initialize bot with default settings (or loaded from config if you prefer)
-            # Headless mode will rely heavily on Supabase remote commands to change patterns/bets
             bot = Bot(
                 base_bet=10, 
                 pattern_string="B", 
