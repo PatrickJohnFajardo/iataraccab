@@ -225,8 +225,8 @@ class BaccaratGUI:
             ("Pattern:", "pattern"),
             ("Strategy:", "strategy"),
             ("Target %:", "target_profit"),
-            ("Game Mode:", "game_mode"),
-            ("Status:", "command")
+            ("Game Mode:", "mode"),
+            ("Bot Status:", "command")
         ]
         
         for i, (label_text, key) in enumerate(fields):
@@ -438,6 +438,7 @@ class BaccaratGUI:
             self.bot.base_bet = int(base_bet)
             self.bot.current_bet = self.bot.base_bet
             self.bot.game_mode = self.game_mode_var.get()
+            self.bot.betting_mode = self.mode_var.get()
             self.bot.session_lost_amount = 0 # Reset on start
             self.bot.pattern = pattern.upper().replace("-", "").replace(" ", "")
             self.bot.reset_on_cycle = reset_on_cycle

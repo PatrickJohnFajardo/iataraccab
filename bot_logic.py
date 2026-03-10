@@ -40,6 +40,7 @@ class Bot:
         self.last_sync_time = 0
         self.local_mode = False
         self.game_mode = "Classic Baccarat"
+        self.betting_mode = "Sequence"
         self.session_lost_amount = 0 # Track accumulated loss for specific recovery modes
         
         # Strategy Multipliers (Transitions from Level 1 up to Level 10)
@@ -166,6 +167,7 @@ class Bot:
                 "strategy": STRATEGY_BOT_TO_DB.get(self.strategy, "standard"),
                 "bot_status": "stop",
                 "balance": 0,
+                "mode": self.game_mode,
             }
             # Link to user if we found one
             if user_id:
@@ -355,7 +357,7 @@ class Bot:
                 self.target_duration = 0
 
         # 7. Game Mode Sync
-        new_game_mode = remote_data.get('game_mode')
+        new_game_mode = remote_data.get('mode')
         if new_game_mode and new_game_mode in ["Classic Baccarat", "Always 8 Baccarat"]:
             if new_game_mode != self.game_mode:
                 self.game_mode = new_game_mode
@@ -381,7 +383,7 @@ class Bot:
             self.running = True
             logger.log("Starting bot (Remote Command)...", "INFO")
 
-        # 9. Final validation
+        # 10. Final validation
         self.apply_constraints()
 
         # Notify UI if callback exists
@@ -541,6 +543,7 @@ class Bot:
                 self.push_monitoring_update()
             time.sleep(0.2)
             # We still check limits here so bot can stop while waiting for a hand if time runs out
+            elapsed_seconds = time.time() - self.start_time
             if self.target_duration > 0 and elapsed_seconds >= self.target_duration:
                 logger.log(f"SESSION STOP: Time limit reached.", "WARNING")
                 self.stop_remotely("Time Limit")
