@@ -386,23 +386,32 @@ class Bot:
                     self.game_mode = new_game_mode
                     logger.log(f"Synced Game Mode: {self.game_mode}", "INFO")
 
-        # 8. Bot Status Sync (enum: 'run' or 'stop')
-        # Only act if we have an explicit status — ignore missing/null to avoid stopping on network glitches
+        # 8. Bot Status Sync
+        # Check BOTH bot_status and command fields — if either says "run", the bot should run.
+        # bot_status = 'run'/'stop' (newer field), command = true/false (legacy field)
         bot_status = remote_data.get('bot_status')
         remote_cmd = remote_data.get('command')
-        
-        if bot_status is not None:
-            should_run = (bot_status == 'run')
-        elif remote_cmd is not None:
-            # Fallback to command field only when explicitly set
+
+        # Resolve each field independently
+        status_says_run = (bot_status == 'run') if bot_status is not None else None
+        if remote_cmd is not None:
             if isinstance(remote_cmd, bool):
-                should_run = remote_cmd
+                cmd_says_run = remote_cmd
             else:
-                should_run = str(remote_cmd).lower() in ['true', 'start', 'run', '1']
+                cmd_says_run = str(remote_cmd).lower() in ['true', 'start', 'run', '1']
         else:
-            # No explicit command received — keep current state (don't stop bot)
-            should_run = self.running
-                
+            cmd_says_run = None
+
+        # Combine: if EITHER field says run → run; BOTH must say stop → stop; neither set → keep current
+        if status_says_run is not None and cmd_says_run is not None:
+            should_run = status_says_run or cmd_says_run  # Either one saying RUN wins
+        elif status_says_run is not None:
+            should_run = status_says_run
+        elif cmd_says_run is not None:
+            should_run = cmd_says_run
+        else:
+            should_run = self.running  # No info — keep current state
+
         if not should_run and self.running:
             self.running = False
             logger.log("Stopping bot (Remote Command)...", "INFO")
