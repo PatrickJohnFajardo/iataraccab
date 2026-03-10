@@ -209,7 +209,6 @@ class Bot:
             "apikey": self.sb_key,
             "Authorization": f"Bearer {self.sb_key}",
             "Content-Type": "application/json",
-            "Prefer": "return=representation",
         }
         
         balance = self.get_current_balance()
@@ -228,15 +227,27 @@ class Bot:
         }
 
         try:
-            # PATCH the bot row by id
+            # PATCH the bot row (use minimal to avoid PostgREST 204-no-body issues)
             url = f"{self.sb_url}/rest/v1/bot?id=eq.{self.bot_id}"
-            response = requests.patch(url, headers=headers, json=payload, timeout=5)
+            response = requests.patch(
+                url,
+                headers={**headers, "Prefer": "return=minimal"},
+                json=payload,
+                timeout=5
+            )
             self.last_sync_time = time.time()
             
             if response.status_code in [200, 204]:
-                data = response.json() if response.text else []
-                if data and len(data) > 0:
-                    self.sync_remote_settings(data[0])
+                # Always do a separate GET to pull the latest remote settings
+                get_resp = requests.get(
+                    f"{self.sb_url}/rest/v1/bot?id=eq.{self.bot_id}&select=*",
+                    headers=headers,
+                    timeout=5
+                )
+                if get_resp.status_code == 200:
+                    data = get_resp.json()
+                    if data:
+                        self.sync_remote_settings(data[0])
             else:
                 logger.log(f"Supabase Sync Failed: {response.status_code}", "DEBUG")
         except Exception as e:
