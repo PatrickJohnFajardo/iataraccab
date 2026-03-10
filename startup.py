@@ -84,6 +84,8 @@ def register_unit(guid):
             )
             if resp.status_code in (200, 204):
                 print(f"[startup] Unit updated: {unit_name} (id={unit_id})")
+            elif resp.status_code == 404:
+                print("[startup] Units table not found — skipping unit registration (non-critical).")
             else:
                 print(f"[startup] Unit update failed [{resp.status_code}]: {resp.text}")
         except Exception as e:
@@ -101,6 +103,8 @@ def register_unit(guid):
             if resp.status_code in (200, 201):
                 new_unit = resp.json()[0] if resp.json() else {}
                 print(f"[startup] New unit registered (id={new_unit.get('id', '?')})")
+            elif resp.status_code == 404:
+                print("[startup] Units table not found — skipping unit registration (non-critical).")
             else:
                 print(f"[startup] Unit registration failed [{resp.status_code}]: {resp.text}")
         except Exception as e:
