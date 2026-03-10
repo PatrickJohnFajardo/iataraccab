@@ -488,6 +488,20 @@ class Bot:
         return selected
 
     def execute_bet(self, target_char):
+        if not self.running: return
+
+        # Budget Check
+        current_bal = self.get_current_balance()
+        if current_bal is not None:
+            min_chip = min([int(k) for k in self.config.get('chips', {'10':0}).keys()])
+            if current_bal < min_chip or current_bal < self.current_bet:
+                logger.log(f"BURNED: Balance {current_bal} cannot cover next bet {self.current_bet}.", "ERROR")
+                self.stop_remotely("Burned")
+                return
+            self.current_bet_start_balance = current_bal
+        elif self.last_end_balance is not None:
+            self.current_bet_start_balance = self.last_end_balance
+
         if target_char == 'T':
             lookup = self.pattern_index - 1
             resolved_side = None
@@ -497,13 +511,6 @@ class Bot:
                     break
                 lookup -= 1
             target_char = resolved_side if resolved_side else 'B'
-
-        # Capture balance before betting for accurate history
-        current_bal = self.get_current_balance()
-        if current_bal is not None:
-            self.current_bet_start_balance = current_bal
-        elif self.last_end_balance is not None:
-            self.current_bet_start_balance = self.last_end_balance
             
         # Humanized pre-bet delay
         time.sleep(random.uniform(0.8, 1.5))
@@ -664,7 +671,8 @@ class Bot:
                 self.pattern_index = (self.pattern_index + 1) % len(self.pattern)
 
                 if self.martingale_level > self.max_level:
-                    self.running = False
+                    logger.log(f"SESSION STOP: Max Level ({self.max_level}) reached.", "WARNING")
+                    self.stop_remotely("Max Level")
                     return
 
             self.last_result = actual_result
