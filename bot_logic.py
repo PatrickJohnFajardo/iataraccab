@@ -170,7 +170,6 @@ class Bot:
                 "command": False,
                 "duration": 60,
                 "strategy": STRATEGY_BOT_TO_DB.get(self.strategy, "standard"),
-                "bot_status": "stop",
                 "balance": 0,
                 "mode": MODE_BOT_TO_DB.get(self.game_mode, "Classic"),
             }
@@ -386,29 +385,14 @@ class Bot:
                     self.game_mode = new_game_mode
                     logger.log(f"Synced Game Mode: {self.game_mode}", "INFO")
 
-        # 8. Bot Status Sync
-        # Check BOTH bot_status and command fields — if either says "run", the bot should run.
-        # bot_status = 'run'/'stop' (newer field), command = true/false (legacy field)
-        bot_status = remote_data.get('bot_status')
+        # 8. Bot Status Sync — driven by command field (true = run, false = stop)
         remote_cmd = remote_data.get('command')
 
-        # Resolve each field independently
-        status_says_run = (bot_status == 'run') if bot_status is not None else None
         if remote_cmd is not None:
             if isinstance(remote_cmd, bool):
-                cmd_says_run = remote_cmd
+                should_run = remote_cmd
             else:
-                cmd_says_run = str(remote_cmd).lower() in ['true', 'start', 'run', '1']
-        else:
-            cmd_says_run = None
-
-        # Combine: if EITHER field says run → run; BOTH must say stop → stop; neither set → keep current
-        if status_says_run is not None and cmd_says_run is not None:
-            should_run = status_says_run or cmd_says_run  # Either one saying RUN wins
-        elif status_says_run is not None:
-            should_run = status_says_run
-        elif cmd_says_run is not None:
-            should_run = cmd_says_run
+                should_run = str(remote_cmd).lower() in ['true', 'start', 'run', '1']
         else:
             should_run = self.running  # No info — keep current state
 
@@ -700,8 +684,8 @@ class Bot:
         """Stops the bot and updates the database status so it doesn't auto-restart."""
         self.running = False
         self.push_monitoring_update(status=reason_status)
-        
-        # Also set bot_status to 'stop' in DB so the website toggle flips to off
+
+        # Set command=false in DB so the website toggle flips to off
         if self.sb_url and self.sb_key and self.bot_id:
             headers = {
                 "apikey": self.sb_key,
@@ -710,7 +694,7 @@ class Bot:
             }
             try:
                 url = f"{self.sb_url}/rest/v1/bot?id=eq.{self.bot_id}"
-                requests.patch(url, headers=headers, json={"bot_status": "stop"}, timeout=5)
+                requests.patch(url, headers=headers, json={"command": False}, timeout=5)
             except:
                 pass
 
